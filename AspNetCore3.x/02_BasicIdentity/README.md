@@ -8,8 +8,10 @@
  * How to setup Razor for RuntimeCompilation in AspNetCore 3.x (in Debug) to view edits on the fly.
  * EntityFramework Core
    * EntityFramework Core InMemory
+   * AppDbContext
  * AspNetCore Identity
    * AspNetCore Identity with EntityFramework
+   * IdentityDbContext replaces DbContext
    * Using UserManager<T>
    * Using SignInManager<T>
    * Configuring the Cookie properties used by Identity
