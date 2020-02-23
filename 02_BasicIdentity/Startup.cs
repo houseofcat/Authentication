@@ -18,14 +18,34 @@ namespace _02_BasicIdentity
             });
 
             // Adding AspNetCore Identity
-            services
-                .AddIdentity<IdentityUser, IdentityRole>() // Default User / Role Object
+            services      // Default User / Role Object - could have been custom
+                .AddIdentity<IdentityUser, IdentityRole>(
+                    options =>
+                    {
+                        options.Password.RequiredLength = 4;
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                    }) 
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(
+                options =>
+                {
+                    options.Cookie.Name = "Basic.Identity";
+                    options.LoginPath = "/Home/Login";
+                    options.LogoutPath = "/Home/Logout";
+                });
+
 #if DEBUG
             services
-                .AddControllersWithViews()
+                .AddControllersWithViews(
+                    options =>
+                    {
+                        // Defaults to true (turn to false if you are used to using Async in your Route + method names.)
+                        options.SuppressAsyncSuffixInActionNames = true;
+                    })
                 .AddRazorRuntimeCompilation();
 #else
             services

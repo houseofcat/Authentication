@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace _02_BasicIdentity.Controllers
 {
+    [Route("[controller]")] // allows customizing the HomeController "home" value
     public class HomeController : Controller
     {
         private UserManager<IdentityUser> UserManager { get; set; }
@@ -18,6 +19,8 @@ namespace _02_BasicIdentity.Controllers
             SignInManager = signInManager;
         }
 
+        [HttpGet("")]
+        [Route("Index")] // additional endpoint
         public IActionResult Index()
         {
             return View();
@@ -25,18 +28,20 @@ namespace _02_BasicIdentity.Controllers
 
         // Verify if a user is allowed to reach this route.
         [Authorize]
+        [HttpGet("Profile")]
         public IActionResult Profile()
         {
             return View();
         }
 
+        [HttpGet("Login")]
         public IActionResult Login()
         {
             return View();
         }
 
 
-        [HttpPost]
+        [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync(string userName, string password)
         {
             var user = await UserManager.FindByNameAsync(userName);
@@ -45,20 +50,21 @@ namespace _02_BasicIdentity.Controllers
                 var result = await SignInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Profile");
                 }
             }
 
             return RedirectToAction("Index");
         }
 
+        [HttpGet("Register")]
         public IActionResult Register()
         {
             return View();
         }
 
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync(string userName, string email, string password)
         {
             var user = await UserManager.FindByNameAsync(userName);
@@ -76,7 +82,7 @@ namespace _02_BasicIdentity.Controllers
                     var signInResult = await SignInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
                     if (signInResult.Succeeded)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Profile");
                     } 
                 }
             }
@@ -84,7 +90,7 @@ namespace _02_BasicIdentity.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
+        [HttpGet("Logout")]
         public async Task<IActionResult> LogoutAsync()
         {
             await SignInManager.SignOutAsync();
