@@ -28,3 +28,7 @@ This is the NetCore version https://github.com/myloveCc/NETCore.MailKit
  
 Identity Tutorial - Raw Coding Youtube Guide (This is just taught really well)  
 https://www.youtube.com/watch?v=Vj7iCb7wDs0
+
+## Flaws
+
+There are a couple of flaws inside of the Token generation for emails as discovered through research. Enhancements were made in the next project on token generation.
