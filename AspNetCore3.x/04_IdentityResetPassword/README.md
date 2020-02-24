@@ -3,10 +3,11 @@
 ## Demonstrates
 
  * All of 03_IdentityEmailConfirm
- * Added ResetPasswordRequest and ResetPassword.
+ * Added ForgotPassword and ResetPassword functionality.
  * Modified how ResetPassword and EmailConfirmation tokens are sent.
-   * Included corrections found at GitHub and Stackoverflow and Microsoft's Identity scaffolding templates.
+   * Included corrections found at GitHub, Stackoverflow, and Microsoft's Identity scaffolding templates.
  * Converting the dependency injected members to private readonly variables (as is convention.)
+ * Standardizing some naming conventions.
 
 ## Sources
 Code Generation Problems  
