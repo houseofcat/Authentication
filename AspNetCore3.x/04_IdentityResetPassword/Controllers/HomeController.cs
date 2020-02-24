@@ -79,7 +79,7 @@ namespace _04_IdentityResetPassword.Controllers
 
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null) { return BadRequest(); } // User Already Exists
-                
+
             user = new IdentityUser
             {
                 UserName = userName,
@@ -177,11 +177,11 @@ namespace _04_IdentityResetPassword.Controllers
 
             passwordToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(passwordToken));
 
-            return View(new ResetPassword { UserId = userId, Token = passwordToken });
+            return View(new ResetPassword { UserId = userId, Token = passwordToken }); // Passing in the ViewModel.
         }
 
         [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPasswordAsync(ResetPassword resetPassword)
+        public async Task<IActionResult> ResetPasswordAsync(ResetPassword resetPassword) // Receiving the ViewModel from post.
         {
             if (!ModelState.IsValid) { return View(resetPassword); }
 
