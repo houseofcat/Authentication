@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using _04_IdentityResetPassword.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
@@ -122,16 +123,16 @@ namespace _04_IdentityResetPassword.Controllers
         }
 
         [HttpGet("VerifyEmail")]
-        public async Task<IActionResult> VerifyEmailAsync(string userId, string code)
+        public async Task<IActionResult> VerifyEmailAsync(string userId, string token)
         {
-            if (userId == null || code == null) { return RedirectToAction("Index"); }
+            if (userId == null || token == null) { return RedirectToAction("Index"); }
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) { return BadRequest(); }
 
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+            token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
 
-            var result = await _userManager.ConfirmEmailAsync(user, code);
+            var result = await _userManager.ConfirmEmailAsync(user, token);
             if (!result.Succeeded) { return BadRequest(); }
 
             return View();
@@ -165,15 +166,26 @@ namespace _04_IdentityResetPassword.Controllers
             return RedirectToAction("ForgotPasswordEmailSent");
         }
 
-        [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPasswordAsync(string userId, string token, string newPassword)
+        [HttpGet("ResetPassword")]
+        public IActionResult ResetPassword(string userId, string token)
         {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) { return BadRequest(); }
+            if (userId == null || token == null) { return RedirectToAction("Index"); }
 
             token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
 
-            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+            return View(new ResetPassword { UserId = userId, Token = token });
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPasswordAsync(ResetPassword resetPassword)
+        {
+            if (resetPassword.UserId == null || resetPassword.Token == null || resetPassword.NewPassword == null)
+            { return RedirectToAction("Index"); }
+
+            var user = await _userManager.FindByIdAsync(resetPassword.UserId);
+            if (user == null) { return BadRequest(); }
+
+            var result = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.NewPassword);
             if (!result.Succeeded) { return BadRequest(); }
 
             return View();
