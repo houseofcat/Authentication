@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace _01_Basics.Controllers
+namespace _05_CookieAuthPolicy.Controllers
 {
     public class HomeController : Controller
     {

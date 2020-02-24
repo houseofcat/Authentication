@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01_BasicCookie", "01_BasicC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02_BasicIdentity", "02_BasicIdentity\02_BasicIdentity.csproj", "{33825D46-69F4-4DC8-A88E-4B0A68E4C005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_IdentityEmailConfirm", "03_IdentityEmailConfirm\03_IdentityEmailConfirm.csproj", "{D3672644-6BFE-49BA-9DA5-78B9A2DA1E10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03_IdentityEmailConfirm", "03_IdentityEmailConfirm\03_IdentityEmailConfirm.csproj", "{D3672644-6BFE-49BA-9DA5-78B9A2DA1E10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_IdentityResetPassword", "04_IdentityResetPassword\04_IdentityResetPassword.csproj", "{BEE78940-6B77-476C-A32F-1BC2EE5B3B91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04_IdentityResetPassword", "04_IdentityResetPassword\04_IdentityResetPassword.csproj", "{BEE78940-6B77-476C-A32F-1BC2EE5B3B91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05_CookieAuthPolicy", "05_CookieAuthPolicy\05_CookieAuthPolicy.csproj", "{FD54AB9B-1955-4775-A6D7-BA501A861124}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BEE78940-6B77-476C-A32F-1BC2EE5B3B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE78940-6B77-476C-A32F-1BC2EE5B3B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE78940-6B77-476C-A32F-1BC2EE5B3B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

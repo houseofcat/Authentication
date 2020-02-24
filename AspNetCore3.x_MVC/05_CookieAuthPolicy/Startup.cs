@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace _01_Basics
+namespace _05_CookieAuthPolicy
 {
     public class Startup
     {
@@ -30,8 +30,14 @@ namespace _01_Basics
                     {
                         config.Cookie.Name = "Basic.Cookie";
                         config.LoginPath = "/Home/Authenticate";
-                        //config.Cookie.Expiration = TimeSpan.FromMinutes(30); // Deprecated
                         config.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    });
+
+            services
+                .AddAuthorization(
+                    options =>
+                    {
+
                     });
 
 #if DEBUG
