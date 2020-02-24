@@ -1,4 +1,4 @@
-# Authentication - 01 Basic Cookie
+# Authentication - 01 BasicCookie
 
 ## Demonstrates
 
@@ -13,5 +13,5 @@
  * HttpContext SignIn
 
 ## Sources
-Identity Tutorial - Raw Coding Youtube Guide (This just done really well)   
+Identity Tutorial - Raw Coding Youtube Guide (This just done really well)  
 https://www.youtube.com/watch?v=IjbtWPXVJGw   

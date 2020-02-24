@@ -1,4 +1,4 @@
-# Authentication - 02 Basic Identity
+# Authentication - 02 BasicIdentity
 
 ## Demonstrates
 
