@@ -37,6 +37,9 @@ namespace _03_IdentityEmailConfirm.Controllers
         [HttpGet("EmailSent")]
         public IActionResult EmailSent() => View();
 
+        [HttpGet("VerifiedEmail")]
+        public IActionResult VerifiedEmail() => View();
+
         [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync(string userName, string password)
         {
@@ -83,9 +86,9 @@ namespace _03_IdentityEmailConfirm.Controllers
                         // Generate Email Verification Url
                         var emailVerification = Url
                             .Action(
-                                nameof(VerifyEmailAsync),
+                                "VerifyEmail",
                                 "Home",
-                                new { user.Id, emailToken },
+                                new { userId = user.Id, emailToken }, // remember these will be on the query parameters
                                 Request.Scheme,
                                 Request.Host.ToString());
 
@@ -119,15 +122,15 @@ namespace _03_IdentityEmailConfirm.Controllers
         }
 
         [HttpGet("VerifyEmail")]
-        public async Task<IActionResult> VerifyEmailAsync(string userId, string code)
+        public async Task<IActionResult> VerifyEmailAsync([FromQuery]string userId, [FromQuery]string emailToken)
         {
             var user = await UserManager.FindByIdAsync(userId);
             if (user == null) { return BadRequest(); }
 
-            var result = await UserManager.ConfirmEmailAsync(user, code);
+            var result = await UserManager.ConfirmEmailAsync(user, emailToken);
             if (!result.Succeeded) { return BadRequest(); }
 
-            return View();
+            return RedirectToAction("VerifiedEmail");
         }
     }
 }

@@ -41,19 +41,25 @@ namespace _04_IdentityResetPassword.Controllers
         [HttpGet("Register")]
         public IActionResult Register() => View();
 
-        [HttpGet("ForgotPassword")]
-        public IActionResult ForgotPassword() => View();
+        [HttpGet("VerifiedEmail")]
+        public IActionResult VerifiedEmail() => View();
 
         [HttpGet("VerifyEmailSent")]
         public IActionResult VerifyEmailSent() => View();
 
+        [HttpGet("ForgotPassword")]
+        public IActionResult ForgotPassword() => View();
+
         [HttpGet("ForgotPasswordEmailSent")]
         public IActionResult ForgotPasswordEmailSent() => View();
 
+        [HttpGet("ResetPasswordConfirmed")]
+        public IActionResult ResetPasswordConfirmed() => View();
+
         [HttpPost("Login")]
-        public async Task<IActionResult> LoginAsync(string userName, string password)
+        public async Task<IActionResult> LoginAsync(string email, string password)
         {
-            var user = await _userManager.FindByNameAsync(userName);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
             {
                 var result = await _signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
@@ -81,38 +87,34 @@ namespace _04_IdentityResetPassword.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, password);
-            if (result.Succeeded)
+            if (!result.Succeeded) { return RedirectToAction("Index"); }
+
+            if (_userManager.Options.SignIn.RequireConfirmedEmail)
             {
-                if (_userManager.Options.SignIn.RequireConfirmedEmail)
-                {
-                    var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    emailToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(emailToken));
+                var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                emailToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(emailToken));
 
-                    var emailVerificationUrl = Url
-                        .Action(
-                            nameof(VerifyEmailAsync),
-                            "Home",
-                            new { user.Id, emailToken },
-                            Request.Scheme,
-                            Request.Host.ToString());
+                var emailVerificationUrl = Url
+                    .Action(
+                        "VerifyEmail",
+                        "Home",
+                        new { userId = user.Id, emailToken },
+                        Request.Scheme,
+                        Request.Host.ToString());
 
-                    var emailVerificationHtml = $"<a href='{HtmlEncoder.Default.Encode(emailVerificationUrl)}'>Verify Email Address!</a>";
+                var emailVerificationHtml = $"<a href='{HtmlEncoder.Default.Encode(emailVerificationUrl)}'>Verify Email Address!</a>";
 
-                    await _emailService.SendAsync("test@email.com", "Email Verification", emailVerificationHtml, true);
+                await _emailService.SendAsync("test@email.com", "Email Verification", emailVerificationHtml, true);
 
-                    return RedirectToAction("VerifyEmailSent");
-                }
-                else
-                {
-                    var signInResult = await _signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
-                    if (signInResult.Succeeded)
-                    {
-                        return RedirectToAction("Profile");
-                    }
-                }
+                return RedirectToAction("VerifyEmailSent");
             }
+            else
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
+                if (!signInResult.Succeeded) { return BadRequest(); }
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Profile");
+            }
         }
 
         [HttpGet("Logout")]
@@ -123,25 +125,27 @@ namespace _04_IdentityResetPassword.Controllers
         }
 
         [HttpGet("VerifyEmail")]
-        public async Task<IActionResult> VerifyEmailAsync(string userId, string token)
+        public async Task<IActionResult> VerifyEmailAsync(string userId, string emailToken)
         {
-            if (userId == null || token == null) { return RedirectToAction("Index"); }
+            if (userId == null || emailToken == null) { return RedirectToAction("Index"); }
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) { return BadRequest(); }
 
-            token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+            emailToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(emailToken));
 
-            var result = await _userManager.ConfirmEmailAsync(user, token);
+            var result = await _userManager.ConfirmEmailAsync(user, emailToken);
             if (!result.Succeeded) { return BadRequest(); }
 
-            return View();
+            return RedirectToAction("VerifiedEmail");
         }
 
-        [HttpGet("ForgotPassword")]
-        public async Task<IActionResult> ForgotPasswordAsync(string userEmail)
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPasswordAsync(string email)
         {
-            var user = await _userManager.FindByEmailAsync(userEmail);
+            if (email == null) { return RedirectToAction("ForgotPassword"); }
+
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null) { return BadRequest(); }
 
             // Generate Password Token
@@ -151,9 +155,9 @@ namespace _04_IdentityResetPassword.Controllers
             // Generate Password Reset Url
             var passwordResetUrl = Url
                 .Action(
-                    nameof(ResetPasswordAsync),
+                    nameof(ResetPassword),
                     "Home",
-                    new { user.Id, passwordToken },
+                    new { userId = user.Id, passwordToken },
                     Request.Scheme,
                     Request.Host.ToString());
 
@@ -161,24 +165,26 @@ namespace _04_IdentityResetPassword.Controllers
             var passwordResetHtml = $"<a href='{HtmlEncoder.Default.Encode(passwordResetUrl)}'>Click here to reset your password!</a>";
 
             // Send email through EmailService (MailKit NetCore)
-            await _emailService.SendAsync("test@email.com", "Password Reset Request", passwordResetUrl, true);
+            await _emailService.SendAsync("test@email.com", "Password Reset Request", passwordResetHtml, true);
 
             return RedirectToAction("ForgotPasswordEmailSent");
         }
 
         [HttpGet("ResetPassword")]
-        public IActionResult ResetPassword(string userId, string token)
+        public IActionResult ResetPassword(string userId, string passwordToken)
         {
-            if (userId == null || token == null) { return RedirectToAction("Index"); }
+            if (userId == null || passwordToken == null) { return RedirectToAction("Index"); }
 
-            token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+            passwordToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(passwordToken));
 
-            return View(new ResetPassword { UserId = userId, Token = token });
+            return View(new ResetPassword { UserId = userId, Token = passwordToken });
         }
 
         [HttpPost("ResetPassword")]
         public async Task<IActionResult> ResetPasswordAsync(ResetPassword resetPassword)
         {
+            if (!ModelState.IsValid) { return View(resetPassword); }
+
             if (resetPassword.UserId == null || resetPassword.Token == null || resetPassword.NewPassword == null)
             { return RedirectToAction("Index"); }
 
@@ -188,7 +194,7 @@ namespace _04_IdentityResetPassword.Controllers
             var result = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.NewPassword);
             if (!result.Succeeded) { return BadRequest(); }
 
-            return View();
+            return RedirectToAction("ResetPasswordConfirmed");
         }
     }
 }

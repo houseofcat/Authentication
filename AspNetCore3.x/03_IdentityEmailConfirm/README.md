@@ -15,7 +15,7 @@
 
  ## Sources
 
- SmtpServer for Test Applications  
+ SmtpServer (localhost) for Test Applications  
  https://github.com/ChangemakerStudios/Papercut
 
  Microsoft Docs - Configuration  
