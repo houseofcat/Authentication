@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "_04_IdentityResetPassword": {
+    "I03_IdentityResetPassword": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "home",

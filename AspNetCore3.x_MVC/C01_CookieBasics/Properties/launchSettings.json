@@ -19,7 +19,7 @@
       "commandName": "AzureDevSpaces",
       "launchBrowser": true
     },
-    "_01_BasicCookie": {
+    "C01_CookieBasics": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

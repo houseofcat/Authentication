@@ -16,7 +16,7 @@
             "ASPNETCORE_ENVIRONMENT": "Development"
         }
     },
-    "_02_BasicIdentity": {
+    "I01_IdentityBasics": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "Home",
