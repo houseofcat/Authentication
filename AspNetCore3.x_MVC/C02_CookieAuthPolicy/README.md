@@ -5,7 +5,7 @@
  * All of 01_BasicCookie
  * CustomClaim with a ClaimHandler
  * AuthorizationHandler
- * Authorizaion Attributes using Policy and Roles
+ * Authorization Attributes using Policy and Roles
 
 ## Sources
 Microsoft Doc - Cookie Authentication  

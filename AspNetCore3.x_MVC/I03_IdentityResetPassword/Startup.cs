@@ -50,6 +50,7 @@ namespace _04_IdentityResetPassword
 
             var mailKitOptions = _config.GetSection("MailKitOptions").Get<MailKitOptions>();
             services.AddMailKit(options => options.UseMailKit(mailKitOptions));
+
 #if DEBUG
             services
                 .AddControllersWithViews(

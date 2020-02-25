@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I03_IdentityResetPassword",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C02_CookieAuthPolicy", "C02_CookieAuthPolicy\C02_CookieAuthPolicy.csproj", "{FD54AB9B-1955-4775-A6D7-BA501A861124}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics\IS401_IdentityServerBasics.csproj", "{643E7150-B179-4A3A-9F31-3E760218AD02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{643E7150-B179-4A3A-9F31-3E760218AD02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643E7150-B179-4A3A-9F31-3E760218AD02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643E7150-B179-4A3A-9F31-3E760218AD02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643E7150-B179-4A3A-9F31-3E760218AD02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
