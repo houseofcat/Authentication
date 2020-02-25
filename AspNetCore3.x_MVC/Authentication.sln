@@ -13,7 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I03_IdentityResetPassword",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C02_CookieAuthPolicy", "C02_CookieAuthPolicy\C02_CookieAuthPolicy.csproj", "{FD54AB9B-1955-4775-A6D7-BA501A861124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics\IS401_IdentityServerBasics.csproj", "{643E7150-B179-4A3A-9F31-3E760218AD02}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics", "{31F12765-47A2-4193-9C9B-090249064538}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics\IS401_IdentityServerBasics\IS401_IdentityServerBasics.csproj", "{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS401_TestApi", "IS401_IdentityServerBasics\IS401_TestApi\IS401_TestApi.csproj", "{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS401_TestClient", "IS401_IdentityServerBasics\IS401_TestClient\IS401_TestClient.csproj", "{5F0B770D-F659-4605-AC7A-E037CDFBA43A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,13 +47,26 @@ Global
 		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD54AB9B-1955-4775-A6D7-BA501A861124}.Release|Any CPU.Build.0 = Release|Any CPU
-		{643E7150-B179-4A3A-9F31-3E760218AD02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{643E7150-B179-4A3A-9F31-3E760218AD02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{643E7150-B179-4A3A-9F31-3E760218AD02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{643E7150-B179-4A3A-9F31-3E760218AD02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F0B770D-F659-4605-AC7A-E037CDFBA43A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F0B770D-F659-4605-AC7A-E037CDFBA43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F0B770D-F659-4605-AC7A-E037CDFBA43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F0B770D-F659-4605-AC7A-E037CDFBA43A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9} = {31F12765-47A2-4193-9C9B-090249064538}
+		{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1} = {31F12765-47A2-4193-9C9B-090249064538}
+		{5F0B770D-F659-4605-AC7A-E037CDFBA43A} = {31F12765-47A2-4193-9C9B-090249064538}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44A3A921-F735-4C8F-AC12-29D971150B1C}

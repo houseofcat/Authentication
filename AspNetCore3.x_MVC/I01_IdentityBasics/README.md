@@ -20,7 +20,7 @@
  * Creating a user.
  * Creating a logout.
  * Various tag helpers.
- * Specific Controller/Action routing.
+ * Specific Controller/Action httpmethod and routing.
 
 ## Sources
 

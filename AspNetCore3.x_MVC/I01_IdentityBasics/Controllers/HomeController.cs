@@ -20,7 +20,7 @@ namespace _02_BasicIdentity.Controllers
         }
 
         [HttpGet("")]
-        [Route("Index")] // additional endpoint
+        [Route("Index")] // additional route/endpoint
         public IActionResult Index()
         {
             return View();

@@ -13,6 +13,9 @@
  * HttpContext SignIn
 
 ## Sources
+Microsoft Doc - Constructor Injection (Using dependencies in main)  
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1#constructor-injection-behavior  
+
 Microsoft Doc - Cookie Authentication
 https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-3.1
 

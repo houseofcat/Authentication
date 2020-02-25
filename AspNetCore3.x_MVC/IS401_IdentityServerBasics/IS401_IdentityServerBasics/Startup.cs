@@ -10,7 +10,15 @@ namespace IS401_IdentityServerBasics
         public void ConfigureServices(IServiceCollection services)
         {
             // Includes Authentication/Authorization
-            services.AddIdentityServer();
+            services
+                .AddIdentityServer()
+                .AddInMemoryApiResources(InMemoryConfig.GetApis()) // For basic demonstration, we are going to persist APIs in memory.
+                .AddInMemoryClients(InMemoryConfig.GetClients()) // Same here we but for Clients in memory. Ideally these are really persisted / comes from a database/store.
+                .AddDeveloperSigningCredential(); // will add a local key to sign tokens - ONLY DEV
+
+            // Without anything else
+            // This url will currently be working.
+            //https://localhost:5001/.well-known/openid-configuration
 
 #if DEBUG
             services
@@ -25,7 +33,6 @@ namespace IS401_IdentityServerBasics
                 .AddControllersWithViews();
 #endif
         }
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
