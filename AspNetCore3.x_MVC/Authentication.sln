@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C01_CookieBasics", "01_BasicCookie\C01_CookieBasics.csproj", "{EEF0BBD6-445F-42B7-A39A-3C3F348FB0AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C01_CookieBasics", "C01_CookieBasics\C01_CookieBasics.csproj", "{EEF0BBD6-445F-42B7-A39A-3C3F348FB0AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I01_IdentityBasics", "02_BasicIdentity\I01_IdentityBasics.csproj", "{33825D46-69F4-4DC8-A88E-4B0A68E4C005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I01_IdentityBasics", "I01_IdentityBasics\I01_IdentityBasics.csproj", "{33825D46-69F4-4DC8-A88E-4B0A68E4C005}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I02_IdentityEmailConfirm", "03_IdentityEmailConfirm\I02_IdentityEmailConfirm.csproj", "{D3672644-6BFE-49BA-9DA5-78B9A2DA1E10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I02_IdentityEmailConfirm", "I02_IdentityEmailConfirm\I02_IdentityEmailConfirm.csproj", "{D3672644-6BFE-49BA-9DA5-78B9A2DA1E10}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I03_IdentityResetPassword", "04_IdentityResetPassword\I03_IdentityResetPassword.csproj", "{BEE78940-6B77-476C-A32F-1BC2EE5B3B91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I03_IdentityResetPassword", "I03_IdentityResetPassword\I03_IdentityResetPassword.csproj", "{BEE78940-6B77-476C-A32F-1BC2EE5B3B91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C02_CookieAuthPolicy", "05_CookieAuthPolicy\C02_CookieAuthPolicy.csproj", "{FD54AB9B-1955-4775-A6D7-BA501A861124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C02_CookieAuthPolicy", "C02_CookieAuthPolicy\C02_CookieAuthPolicy.csproj", "{FD54AB9B-1955-4775-A6D7-BA501A861124}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
