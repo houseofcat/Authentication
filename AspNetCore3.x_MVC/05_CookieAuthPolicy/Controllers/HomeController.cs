@@ -23,6 +23,12 @@ namespace _05_CookieAuthPolicy.Controllers
             return View();
         }
 
+        [Authorize(Policy = "AdminPolicy")]
+        public IActionResult AdminProfile()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Authenticate()
         {
             var mainIdentity = new ClaimsIdentity(
@@ -30,6 +36,7 @@ namespace _05_CookieAuthPolicy.Controllers
                 {
                     new Claim(ClaimTypes.Name, "Test"),
                     new Claim(ClaimTypes.Email, "test@email.com"),
+                    new Claim("IsAdmin", "true")
                 },
                 CookieAuthenticationDefaults.AuthenticationScheme
             );

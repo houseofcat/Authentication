@@ -10,10 +10,10 @@
  * Standardizing some naming conventions.
 
 ## Sources
-Code Generation Problems  
-https://github.com/dotnet/aspnetcore/issues/8325
-https://stackoverflow.com/questions/38781295/asp-net-core-identity-invalid-token-on-confirmation-email
-https://github.com/dotnet/aspnetcore/issues/5789
+Code Generation Problems   
+https://github.com/dotnet/aspnetcore/issues/8325  
+https://stackoverflow.com/questions/38781295/asp-net-core-identity-invalid-token-on-confirmation-email  
+https://github.com/dotnet/aspnetcore/issues/5789  
 
 Identity Scaffolding Examples With Correction
 

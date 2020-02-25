@@ -1,10 +1,13 @@
+using _05_CookieAuthPolicy.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Security.Claims;
 
 namespace _05_CookieAuthPolicy
 {
@@ -26,19 +29,25 @@ namespace _05_CookieAuthPolicy
                     })
                 .AddCookie(
                     CookieAuthenticationDefaults.AuthenticationScheme,
-                    config =>
+                    options =>
                     {
-                        config.Cookie.Name = "Basic.Cookie";
-                        config.LoginPath = "/Home/Authenticate";
-                        config.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                        options.Cookie.Name = "Basic.Cookie";
+                        options.LoginPath = "/Home/Authenticate";
+                        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                     });
 
             services
                 .AddAuthorization(
                     options =>
                     {
-
+                        options.AddPolicy("AdminPolicy", builder =>
+                        {
+                            //builder.AddRequirements(new CookieRequireClaim(ClaimTypes.AuthenticationMethod));
+                            builder.RequireCustomClaim("IsAdmin");
+                        });
                     });
+
+            services.AddSingleton<IAuthorizationHandler, CookieRequireClaimHandler>();
 
 #if DEBUG
             services

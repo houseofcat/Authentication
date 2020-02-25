@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Security.Claims;
 
 namespace _01_Basics
 {
@@ -33,6 +35,19 @@ namespace _01_Basics
                         //config.Cookie.Expiration = TimeSpan.FromMinutes(30); // Deprecated
                         config.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                     });
+
+            // This isn't really necessary but demonstrates how to specify a policy
+            //services
+            //    .AddAuthorization(
+            //        options =>
+            //        {
+            //            var policy = new AuthorizationPolicyBuilder()
+            //            .RequireAuthenticatedUser()
+            //            .RequireClaim(ClaimTypes.Name)
+            //            .Build(); ;
+
+            //            options.DefaultPolicy = policy;
+            //        });
 
 #if DEBUG
             services
