@@ -40,6 +40,7 @@ namespace _05_CookieAuthPolicy
                 .AddAuthorization(
                     options =>
                     {
+                        options.AddPolicy("LegacyAdminPolicy", builder => builder.RequireRole("LegacyAdmin"));
                         options.AddPolicy("AdminPolicy", builder =>
                         {
                             //builder.AddRequirements(new CookieRequireClaim(ClaimTypes.AuthenticationMethod));

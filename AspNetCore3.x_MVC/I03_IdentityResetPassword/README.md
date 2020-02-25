@@ -1,8 +1,8 @@
-# Authentication - 04 IdentityResetPassword
+# Authentication - I03 IdentityResetPassword
 
 ## Demonstrates
 
- * All of 03_IdentityEmailConfirm
+ * All of I02_IdentityEmailConfirm
  * Added ForgotPassword and ResetPassword functionality.
  * Modified how ResetPassword and EmailConfirmation tokens are sent.
    * Included corrections found at GitHub, Stackoverflow, and Microsoft's Identity scaffolding templates.

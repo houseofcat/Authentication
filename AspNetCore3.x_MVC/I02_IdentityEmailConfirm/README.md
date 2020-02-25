@@ -1,8 +1,8 @@
-# Authentication - 03 IdentityEmailConfirm
+# Authentication - I02 IdentityEmailConfirm
 
 ## Demonstrates
 
- * All of 02_BasicIdentity
+ * All of I01_IdentityBasics
  * Alternative method for cleaner Get View in HomeController.
  * Startup.cs constructor dependency injecting configuration.
    * Appsettings.json is automatically loaded as IConfiguration.
@@ -13,12 +13,12 @@
  * Register user no longer redirects to Index.
    * Generates a email verification token to be used in an email.
 
- ## Sources
+## Sources
 
- SmtpServer (localhost) for Test Applications  
- https://github.com/ChangemakerStudios/Papercut
+SmtpServer (localhost) for Test Applications  
+https://github.com/ChangemakerStudios/Papercut
 
- Microsoft Docs - Configuration  
+Microsoft Docs - Configuration  
 https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1  
 
  Microsoft Docs - SmtpClient Deprecated  
@@ -27,7 +27,7 @@ Recommends MailKit https://github.com/jstedfast/MailKit
 This is the NetCore version https://github.com/myloveCc/NETCore.MailKit  
  
 Identity Tutorial - Raw Coding Youtube Guide (This is just taught really well)  
-https://www.youtube.com/watch?v=Vj7iCb7wDs0
+https://www.youtube.com/watch?v=Vj7iCb7wDs0  
 
 ## Flaws
 

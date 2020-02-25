@@ -29,6 +29,18 @@ namespace _05_CookieAuthPolicy.Controllers
             return View();
         }
 
+        [Authorize(Roles = "LegacyAdminRole")]
+        public IActionResult LegacyAdminProfile()
+        {
+            return View();
+        }
+
+        [Authorize(Policy = "LegacyAdminPolicy")]
+        public IActionResult LegacyAdminProfile2()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Authenticate()
         {
             var mainIdentity = new ClaimsIdentity(

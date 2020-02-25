@@ -1,4 +1,4 @@
-# Authentication - 02 BasicIdentity
+# Authentication - I01 IdentityBasics
 
 ## Demonstrates
 
@@ -22,16 +22,16 @@
  * Various tag helpers.
  * Specific Controller/Action routing.
 
- ## Sources
+## Sources
 
- Microsoft Docs - Tag Helpers  
- https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-3.1  
+Microsoft Docs - Tag Helpers  
+https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-3.1  
 
- Microsoft Docs - DI  
- https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1  
+Microsoft Docs - DI  
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1  
 
- Microsoft Docs - Controller Methods and Views  
- https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/controller-methods-views?view=aspnetcore-3.1  
+Microsoft Docs - Controller Methods and Views  
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/controller-methods-views?view=aspnetcore-3.1  
  
- Identity Tutorial - Raw Coding Youtube Guide (This just done really well)  
- https://www.youtube.com/watch?v=IjbtWPXVJGw  
+Identity Tutorial - Raw Coding Youtube Guide (This just done really well)  
+https://www.youtube.com/watch?v=IjbtWPXVJGw  
