@@ -2,7 +2,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace IS401_IdentityServerBasics
+namespace IS402_IdentityServerMvcClient
 {
     // For demo purposes, how we quickly define API and Client Resources.
     // This could/should be replaced by loading resources from elsewhere (etc. DB)

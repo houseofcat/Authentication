@@ -4,7 +4,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace IS401_TestClient.Controllers
+namespace IS402_TestClient.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
