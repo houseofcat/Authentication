@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS401_IdentityServerBasics"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics\IS401_IdentityServerBasics\IS401_IdentityServerBasics.csproj", "{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS401_TestApi", "IS401_IdentityServerBasics\IS401_TestApi\IS401_TestApi.csproj", "{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_TestApi", "IS401_IdentityServerBasics\IS401_TestApi\IS401_TestApi.csproj", "{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS401_TestClient", "IS401_IdentityServerBasics\IS401_TestClient\IS401_TestClient.csproj", "{5F0B770D-F659-4605-AC7A-E037CDFBA43A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_TestApiClient", "IS401_IdentityServerBasics\IS401_TestApiClient\IS401_TestApiClient.csproj", "{5F0B770D-F659-4605-AC7A-E037CDFBA43A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

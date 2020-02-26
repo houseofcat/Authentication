@@ -23,9 +23,37 @@ After AddingIdentityServer, the Apis, and the Clients. This document should resp
 https://localhost:5001/.well-known/openid-configuration  
 ```
 
-Really notable mentions of using the `IdentityModel.Client` and the `IHttpClientFactory` with `Polly`.  
+An Example of the flow.
+
+```
+TestApiClient Endpoint -> IdentityClient (using HttpClient #1) -> IdentityServer GetDiscoveryDoc    \\ Retrieve OpenId Configuration   
+```
+
+```
+TestApiClient Endpoint -> IdentityClient (using HttpClient #1) -> IdentityServer GetClientToken     \\ Retrieve the ClientToken credential  
+```
+
+```
+TestApiClient Endpoint -> Secure TestApi Endpoint w/ Token (using HttpClient #2)        \\ Action requiring Authorization  
+```
+
+```
+Inbound
+TestApi -> Validates Token w/ IdentityServer -> Perform Action       \\ Action is allowed.
+```
+
+```
+Outbound
+TestApi -> TestApiClient    \\ Return values.
+```
+
+Generally speaking, you could remove the OpenId config step but if you hardcode these values you will need to update code when/if it ever changes URL/URI or Domain etc.
+If you do retrieve the doc, it is also probably best to cache this so you don't get it on every call.
+
+Really notable mentions in this demo are the using of `IdentityModel.Client` which adds HttpClient extensions and the `IHttpClientFactory` with `Polly` for HttpClient management, retry policies, and circuit breaker pattern.  
 
 Here are the polly plugin policies being used:  
+
 ```csharp
 public static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 {

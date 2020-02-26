@@ -18,7 +18,7 @@ namespace IS401_TestClient
                     options =>
                     {
                         options.Authority = "https://localhost:5001/"; // IdentityServer4
-                        options.Audience = "TestApiTwo"; // identify ourselves
+                        options.Audience = "TestApiClient"; // identify ourselves
                     });
 
             services
@@ -27,7 +27,7 @@ namespace IS401_TestClient
                     options =>
                     {
                         options.BaseAddress = new Uri("https://localhost:5001/"); // this base url is using the IdentityServer address.
-                        options.Timeout = TimeSpan.FromSeconds(20);
+                        options.Timeout = TimeSpan.FromSeconds(120);
                     })
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5))
                 .AddPolicyHandler(Policies.GetRetryPolicy())
@@ -39,10 +39,10 @@ namespace IS401_TestClient
                     options =>
                     {
                         options.BaseAddress = new Uri("https://localhost:5011/api/"); // this base url is using the TestApi address.
-                        options.Timeout = TimeSpan.FromSeconds(20);
+                        options.Timeout = TimeSpan.FromSeconds(120);
                     })
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5))
-                .AddPolicyHandler(Policies.GetRetryPolicy())
+                .AddPolicyHandler(Policies.GetRetryPolicy()) // Timeout may need to be adjusted to support a proper retry.
                 .AddPolicyHandler(Policies.GetCircuitBreakerPolicy());
 
             // No longer need to worry about HttpClient Singleton/DnsCachingIssues/Refresh.
