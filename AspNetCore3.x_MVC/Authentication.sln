@@ -14,6 +14,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C02_CookieAuthPolicy", "C02_CookieAuthPolicy\C02_CookieAuthPolicy.csproj", "{FD54AB9B-1955-4775-A6D7-BA501A861124}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics", "{31F12765-47A2-4193-9C9B-090249064538}"
+	ProjectSection(SolutionItems) = preProject
+		IS401_IdentityServerBasics\README.md = IS401_IdentityServerBasics\README.md
+		IS401_IdentityServerBasics\RunAll.bat = IS401_IdentityServerBasics\RunAll.bat
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics\IS401_IdentityServerBasics\IS401_IdentityServerBasics.csproj", "{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}"
 EndProject
@@ -22,6 +26,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_TestApiClient", "IS401_IdentityServerBasics\IS401_TestApiClient\IS401_TestApiClient.csproj", "{5F0B770D-F659-4605-AC7A-E037CDFBA43A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS402_IdentityServerMvcClient", "IS402_IdentityServerMvcClient", "{C6AA7548-9A38-4B2F-857A-98D0A0CF929E}"
+	ProjectSection(SolutionItems) = preProject
+		IS402_IdentityServerMvcClient\README.md = IS402_IdentityServerMvcClient\README.md
+		IS402_IdentityServerMvcClient\RunAll.bat = IS402_IdentityServerMvcClient\RunAll.bat
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_IdentityServerMvcClient", "IS402_IdentityServerMvcClient\IS402_IdentityServerMvcClient\IS402_IdentityServerMvcClient.csproj", "{41D8521B-0180-44AE-9282-2E90DA37A1B1}"
 EndProject
@@ -32,6 +40,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_TestMvcClient", "IS402_IdentityServerMvcClient\IS402_TestMvcClient\IS402_TestMvcClient.csproj", "{6585C580-612E-4B87-A169-55DECE479C40}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS403_IdentityServerAspNetIdentity", "IS403_IdentityServerAspNetIdentity", "{BD76A78B-9170-40D9-B989-F066A52DC756}"
+	ProjectSection(SolutionItems) = preProject
+		IS403_IdentityServerAspNetIdentity\README.md = IS403_IdentityServerAspNetIdentity\README.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_MvcClient", "IS403_IdentityServerAspNetIdentity\IS403_MvcClient\IS403_MvcClient.csproj", "{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}"
 EndProject
