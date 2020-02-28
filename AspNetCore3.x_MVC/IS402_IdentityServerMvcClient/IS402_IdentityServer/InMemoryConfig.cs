@@ -2,7 +2,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace IS402_IdentityServerMvcClient
+namespace IS402_IdentityServer
 {
     public static class InMemoryConfig
     {

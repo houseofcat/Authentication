@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS401_IdentityServerBasics"
 		IS401_IdentityServerBasics\RunAll.bat = IS401_IdentityServerBasics\RunAll.bat
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_IdentityServerBasics", "IS401_IdentityServerBasics\IS401_IdentityServerBasics\IS401_IdentityServerBasics.csproj", "{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_IdentityServer", "IS401_IdentityServerBasics\IS401_IdentityServer\IS401_IdentityServer.csproj", "{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_TestApi", "IS401_IdentityServerBasics\IS401_TestApi\IS401_TestApi.csproj", "{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}"
 EndProject
@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS402_IdentityServerMvcClie
 		IS402_IdentityServerMvcClient\RunAll.bat = IS402_IdentityServerMvcClient\RunAll.bat
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_IdentityServerMvcClient", "IS402_IdentityServerMvcClient\IS402_IdentityServerMvcClient\IS402_IdentityServerMvcClient.csproj", "{41D8521B-0180-44AE-9282-2E90DA37A1B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_IdentityServer", "IS402_IdentityServerMvcClient\IS402_IdentityServer\IS402_IdentityServer.csproj", "{41D8521B-0180-44AE-9282-2E90DA37A1B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_TestApi", "IS402_IdentityServerMvcClient\IS402_TestApi\IS402_TestApi.csproj", "{8456B526-6167-442F-BFE2-83120F354308}"
 EndProject
@@ -46,7 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS403_IdentityServerAspNetI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_MvcClient", "IS403_IdentityServerAspNetIdentity\IS403_MvcClient\IS403_MvcClient.csproj", "{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_IdentityServerAspNetIdentity", "IS403_IdentityServerAspNetIdentity\IS403_IdentityServerAspNetIdentity\IS403_IdentityServerAspNetIdentity.csproj", "{51729BB9-6DFD-4739-864F-12B2178EE943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_IdentityServerAspNetIdentity", "IS403_IdentityServerAspNetIdentity\IS403_IdentityServer\IS403_IdentityServer.csproj", "{51729BB9-6DFD-4739-864F-12B2178EE943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

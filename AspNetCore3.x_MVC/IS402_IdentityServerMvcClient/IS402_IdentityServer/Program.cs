@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
 
-namespace IS402_IdentityServerMvcClient
+namespace IS402_IdentityServer
 {
     public class Program
     {

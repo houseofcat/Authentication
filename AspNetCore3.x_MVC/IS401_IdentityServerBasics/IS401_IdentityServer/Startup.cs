@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace IS401_IdentityServerBasics
+namespace IS401_IdentityServer
 {
     public class Startup
     {

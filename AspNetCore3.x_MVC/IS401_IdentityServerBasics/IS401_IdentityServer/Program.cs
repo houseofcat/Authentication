@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
 
-namespace IS401_IdentityServerBasics
+namespace IS401_IdentityServer
 {
     public class Program
     {
