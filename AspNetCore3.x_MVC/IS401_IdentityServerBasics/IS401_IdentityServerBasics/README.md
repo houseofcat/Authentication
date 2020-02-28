@@ -12,7 +12,7 @@
    * Using JWT (AddJwtBearer() from pacakage)
    * Changing the Kestrel ports in `Properties/launchSettings.json`
    * Notes on ConfigureAwait / SyncContext
- * TestClient - WebApi
+ * TestApiClient - WebApi
    * IHttpClientFactory
      * Named client usage.
      * Polly Plugin: Retry.
