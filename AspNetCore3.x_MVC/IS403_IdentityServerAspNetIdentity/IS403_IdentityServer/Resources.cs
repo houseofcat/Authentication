@@ -2,9 +2,9 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace IS403_IdentityServerAspNetIdentity
+namespace IS403_IdentityServer
 {
-    public static class InMemoryConfig
+    public static class Resources
     {
         public static IEnumerable<IdentityResource> GetIdentityResources() =>
             new List<IdentityResource>

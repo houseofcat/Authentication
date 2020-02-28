@@ -41,12 +41,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_TestMvcClient", "IS40
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS403_IdentityServerAspNetIdentity", "IS403_IdentityServerAspNetIdentity", "{BD76A78B-9170-40D9-B989-F066A52DC756}"
 	ProjectSection(SolutionItems) = preProject
+		IS403_IdentityServerAspNetIdentity\CreateIdentityDatabase.sql = IS403_IdentityServerAspNetIdentity\CreateIdentityDatabase.sql
+		IS403_IdentityServerAspNetIdentity\CreateIdentityLoggingDatabase.sql = IS403_IdentityServerAspNetIdentity\CreateIdentityLoggingDatabase.sql
+		IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_Identity.PNG = IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_Identity.PNG
+		IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_IdentityLogging.PNG = IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_IdentityLogging.PNG
 		IS403_IdentityServerAspNetIdentity\README.md = IS403_IdentityServerAspNetIdentity\README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_MvcClient", "IS403_IdentityServerAspNetIdentity\IS403_MvcClient\IS403_MvcClient.csproj", "{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_IdentityServerAspNetIdentity", "IS403_IdentityServerAspNetIdentity\IS403_IdentityServer\IS403_IdentityServer.csproj", "{51729BB9-6DFD-4739-864F-12B2178EE943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_IdentityServer", "IS403_IdentityServerAspNetIdentity\IS403_IdentityServer\IS403_IdentityServer.csproj", "{51729BB9-6DFD-4739-864F-12B2178EE943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
