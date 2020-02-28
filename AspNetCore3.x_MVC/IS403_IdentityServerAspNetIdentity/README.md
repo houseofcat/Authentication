@@ -19,6 +19,9 @@ Download
 3.) I have included a generic new Database Window screenshot. Super simple setup out of the box. Make sure your account is owner.
     * Alternatively you could run a Database build script that may or may not work for you. These things break or stop working all the time when changing versions.
 
+There are Sql scripts to build databases that match the `ConnectionStrings` in `appSetttings.json` (or go it alone).  
+I also included PNGs to give you a visual on what to expect and a couple of Sql scripts that I used for stuff.  
+
 ## List of Dependencies For Serilog, IdentityServer4, EF, AspNetCoreIdentity
 
 Please review these new dependencies and proceed when you feel comfortable with what all is what. Review Startup.cs/ConfigureExtensions.cs
