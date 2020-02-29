@@ -22,8 +22,4 @@
     <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.1.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
-
 </Project>
