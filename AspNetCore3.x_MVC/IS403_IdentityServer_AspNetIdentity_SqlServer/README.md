@@ -21,13 +21,13 @@ stuff away from regular database activity. I also generally having a logging dat
 will provide all the logging for these projects related to `IdentityServer`. Each application will get it's own
 table.
 
- 1.) Install SqlServer 2019 (if needed).
- 2.) Install SMSS 2018 (if needed).
- 3.) Create `Identity` database from wizard or script (if wanted).
- 4.) Create `IdentityLogging` database from wizard or script (if wanted).
- 5.) Startup `IdentityServer`. Logs will be in `IdentityLogging` table `IdentityServer`.
- 6.) First run will have executed the DB migrations included in this project.
- 7.) Verify the migration created tables under `Identity` database.
+ 1.) Install SqlServer 2019 (if needed).  
+ 2.) Install SMSS 2018 (if needed).  
+ 3.) Create `Identity` database from wizard or script (if wanted).  
+ 4.) Create `IdentityLogging` database from wizard or script (if wanted).  
+ 5.) Startup `IdentityServer`. Logs will be in `IdentityLogging` table `IdentityServer`.  
+ 6.) First run will have executed the DB migrations included in this project.  
+ 7.) Verify the migration created tables under `Identity` database.  
 
 ### SqlServer 2019
 This project will start using a Database but I will not fully detail the steps to install it well.  
@@ -41,22 +41,22 @@ Link: https://www.microsoft.com/en-us/sql-server/sql-server-downloads
 Click `Download 2019 Developer edition`  
 
 ### SqlServer 2019 Management  
-Today there are a couple of tools you could use, I am going to stick with the main one but here are two prominent ones.   
+Today there are a couple of tools you could use, I am going to stick with the main (but also include a cross-platform option).   
 
 You should get familiar with browsing and exploring your local databases anyways as this will prepare you for working with production databases located elsewhere.  
 
-**Sql Server Management Studio 2018 (SSMS 2018)**  
-Link: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15  
+#### Sql Server Management Studio 2018 (SSMS 2018)
+[Microsoft Doc](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 
-Inside SSMS 2018  
+**Inside SSMS 2018**  
 I have included a simple generic new Database Window screenshot - just make sure your account is owner of the database.  
 ***Alternatively, you could run the included Database build script that may or may not work for you. These things break or stop working all the time when changing versions.***  
 
 The included CreateDatabase scripts are based on what you see in `ConnectionStrings` in `appSetttings.json`.  
-I took screenshots to give you an idea of what it generates.
+I took screenshots to give you an idea of what it generates after they have ran.
 
-**Azure Data Studio (formerly SQL Operations Studio)**  
-Link: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15  
+#### Azure Data Studio (formerly SQL Operations Studio)  
+[Microsoft Doc](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15)   
 
 ### List of Dependencies For Serilog, IdentityServer4, EF, AspNetIdentity
 Please review these new dependencies and proceed when you feel comfortable with what all is what. Review Startup.cs/ConfigureExtensions.cs  
@@ -81,12 +81,17 @@ Please review these new dependencies and proceed when you feel comfortable with 
 **AspNetIdentity is inside NetCoreApp3.1, do not include the 2.x.x Nuget packages.**
 
 ### Serilog For MS SqlServer
-
+It will not create the database for you which is why I provided a script.
 ```
-If autoCreateSqlTable is true, the sink will create the table if a table by that name doesn't exist. It will also create the schema if no schema by that name exists. The account connecting to SQL Server will need adequate permissions to create a table (see the Permissions section of the Table Definition topic).
+If autoCreateSqlTable is true, the sink will create the table if a table by that name doesn't exist.  
+
+It will also create the schema if no schema by that name exists. 
+
+The account connecting to SQL Server will need adequate permissions to create a table (see the Permissions  
+section of the Table Definition topic).
 ```
 
-[Details](https://github.com/serilog/serilog-sinks-mssqlserver)
+[More Serilog SqlServer Details](https://github.com/serilog/serilog-sinks-mssqlserver)
 
 ## EntityFramework Tools
 You need to have this installed on your machine for Entity Framework migrations.  
@@ -123,10 +128,11 @@ dotnet ef migrations add Initial_IS4_PersistedGrantDbMigration -c PersistedGrant
 dotnet ef migrations add Initial_IS4_ConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/ConfigurationDb  
 ```
 
-On Startup (if Debug) will actually execute the creation of this Database plan. That is migrations in a nutshell.  
+On Startup (if Debug) will actually execute the creation of this Database plan. That is how migrations work in a nutshell.  
 The history (of whether a migration has been ran/executed) is stored in the dbo.__EFMigrationsHistory. If a migration  
 has already been ran, it won't run again thanks to this table. To get it to actually run again you will have to delete  
-the entries from this table (and potentially all the other objects/tables/procedures it created to prevent errors).  
+the entries from this table (and potentially all the other objects/tables/procedures it created to prevent errors). Alternatively,
+you make adjustments then add additional migrations which will get executed the next time you Startup in Debug.
 
 ### NetCore SDK 3.1.2
 https://dotnet.microsoft.com/download/dotnet-core/3.1  
