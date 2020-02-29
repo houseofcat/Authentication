@@ -58,24 +58,31 @@ Also added package to this project (dotnet add package Microsoft.EntityFramework
 
 ### Install
 
-    dotnet tool install --global dotnet-ef  
+```powershell
+dotnet tool install --global dotnet-ef
+```
 
 ### Update
 
-    dotnet tool update --global dotnet-ef  
+```powershell
+dotnet tool update --global dotnet-ef
+```
 
 ### Update (specific version)  
 
-    dotnet tool update --global dotnet-ef --version 3.1.2  
-
+```powershell
+dotnet tool update --global dotnet-ef --version 3.1.2  
+```
 
 ### Build Out Your Migrations
 This will take the two classes (that come from IdentityServer library) and your own AppDbContext to structure out the code version of how your Database should look.  
 
+```powershell
                                                               # Full Name Space To AppDbContext
-    dotnet ef migrations add Initial_AppDbContextMigration -c IdentityServer.Data.AppDbContext -o Data/Migrations/ApplicationDb  
-    dotnet ef migrations add Initial_IS4_PersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/PersistedGrantDb  
-    dotnet ef migrations add Initial_IS4_ConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/ConfigurationDb  
+dotnet ef migrations add Initial_AppDbContextMigration -c IdentityServer.Data.AppDbContext -o Data/Migrations/ApplicationDb  
+dotnet ef migrations add Initial_IS4_PersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/PersistedGrantDb  
+dotnet ef migrations add Initial_IS4_ConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/ConfigurationDb  
+```
 
 On Startup (if Debug) will actually execute the creation of this Database plan. That is migrations in a nutshell.  
 The history (of whether a migration has been ran/executed) is stored in the dbo.__efMigrationsHistory. If a migration  
