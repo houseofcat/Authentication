@@ -19,11 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS401_IdentityServerBasics"
 		IS401_IdentityServerBasics\RunAll.bat = IS401_IdentityServerBasics\RunAll.bat
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_IdentityServer", "IS401_IdentityServerBasics\IS401_IdentityServer\IS401_IdentityServer.csproj", "{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IS401_IdentityServerBasics\IdentityServer\IdentityServer.csproj", "{AAF481CF-94FA-48E6-A302-3DD1DCBFBDE9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_TestApi", "IS401_IdentityServerBasics\IS401_TestApi\IS401_TestApi.csproj", "{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApi", "IS401_IdentityServerBasics\TestApi\TestApi.csproj", "{AC8B60E3-C3BE-4699-8EA5-41F08607A6F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS401_TestApiClient", "IS401_IdentityServerBasics\IS401_TestApiClient\IS401_TestApiClient.csproj", "{5F0B770D-F659-4605-AC7A-E037CDFBA43A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApiClient", "IS401_IdentityServerBasics\TestApiClient\TestApiClient.csproj", "{5F0B770D-F659-4605-AC7A-E037CDFBA43A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS402_IdentityServerMvcClient", "IS402_IdentityServerMvcClient", "{C6AA7548-9A38-4B2F-857A-98D0A0CF929E}"
 	ProjectSection(SolutionItems) = preProject
@@ -31,28 +31,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS402_IdentityServerMvcClie
 		IS402_IdentityServerMvcClient\RunAll.bat = IS402_IdentityServerMvcClient\RunAll.bat
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_IdentityServer", "IS402_IdentityServerMvcClient\IS402_IdentityServer\IS402_IdentityServer.csproj", "{41D8521B-0180-44AE-9282-2E90DA37A1B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IS402_IdentityServerMvcClient\IdentityServer\IdentityServer.csproj", "{41D8521B-0180-44AE-9282-2E90DA37A1B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_TestApi", "IS402_IdentityServerMvcClient\IS402_TestApi\IS402_TestApi.csproj", "{8456B526-6167-442F-BFE2-83120F354308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApi", "IS402_IdentityServerMvcClient\TestApi\TestApi.csproj", "{8456B526-6167-442F-BFE2-83120F354308}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_TestApiClient", "IS402_IdentityServerMvcClient\IS402_TestApiClient\IS402_TestApiClient.csproj", "{9785C838-6536-46C3-8E92-8D3B570BB565}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApiClient", "IS402_IdentityServerMvcClient\TestApiClient\TestApiClient.csproj", "{9785C838-6536-46C3-8E92-8D3B570BB565}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS402_TestMvcClient", "IS402_IdentityServerMvcClient\IS402_TestMvcClient\IS402_TestMvcClient.csproj", "{6585C580-612E-4B87-A169-55DECE479C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMvcClient", "IS402_IdentityServerMvcClient\TestMvcClient\TestMvcClient.csproj", "{6585C580-612E-4B87-A169-55DECE479C40}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS403_IdentityServerAspNetIdentity", "IS403_IdentityServerAspNetIdentity", "{BD76A78B-9170-40D9-B989-F066A52DC756}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS403_IdentityServer_AspNetIdentity_SqlServer", "IS403_IdentityServer_AspNetIdentity_SqlServer", "{BD76A78B-9170-40D9-B989-F066A52DC756}"
 	ProjectSection(SolutionItems) = preProject
-		IS403_IdentityServerAspNetIdentity\CreateIdentityDatabase.sql = IS403_IdentityServerAspNetIdentity\CreateIdentityDatabase.sql
-		IS403_IdentityServerAspNetIdentity\CreateIdentityLoggingDatabase.sql = IS403_IdentityServerAspNetIdentity\CreateIdentityLoggingDatabase.sql
-		IS403_IdentityServerAspNetIdentity\DataStructure.PNG = IS403_IdentityServerAspNetIdentity\DataStructure.PNG
-		IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_Identity.PNG = IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_Identity.PNG
-		IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_IdentityLogging.PNG = IS403_IdentityServerAspNetIdentity\NewDatabaseWindow_IdentityLogging.PNG
-		IS403_IdentityServerAspNetIdentity\README.md = IS403_IdentityServerAspNetIdentity\README.md
-		IS403_IdentityServerAspNetIdentity\SqlSnippets.sql = IS403_IdentityServerAspNetIdentity\SqlSnippets.sql
+		IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityDatabase.sql = IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityDatabase.sql
+		IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityLoggingDatabase.sql = IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityLoggingDatabase.sql
+		IS403_IdentityServer_AspNetIdentity_SqlServer\DataStructure.PNG = IS403_IdentityServer_AspNetIdentity_SqlServer\DataStructure.PNG
+		IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_Identity.PNG = IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_Identity.PNG
+		IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_IdentityLogging.PNG = IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_IdentityLogging.PNG
+		IS403_IdentityServer_AspNetIdentity_SqlServer\README.md = IS403_IdentityServer_AspNetIdentity_SqlServer\README.md
+		IS403_IdentityServer_AspNetIdentity_SqlServer\SqlSnippets.sql = IS403_IdentityServer_AspNetIdentity_SqlServer\SqlSnippets.sql
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_MvcClient", "IS403_IdentityServerAspNetIdentity\IS403_MvcClient\IS403_MvcClient.csproj", "{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS403_IdentityServer", "IS403_IdentityServerAspNetIdentity\IS403_IdentityServer\IS403_IdentityServer.csproj", "{51729BB9-6DFD-4739-864F-12B2178EE943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IS403_IdentityServer_AspNetIdentity_SqlServer\IdentityServer\IdentityServer.csproj", "{51729BB9-6DFD-4739-864F-12B2178EE943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,10 +106,6 @@ Global
 		{6585C580-612E-4B87-A169-55DECE479C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6585C580-612E-4B87-A169-55DECE479C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6585C580-612E-4B87-A169-55DECE479C40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51729BB9-6DFD-4739-864F-12B2178EE943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51729BB9-6DFD-4739-864F-12B2178EE943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51729BB9-6DFD-4739-864F-12B2178EE943}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -128,7 +122,6 @@ Global
 		{8456B526-6167-442F-BFE2-83120F354308} = {C6AA7548-9A38-4B2F-857A-98D0A0CF929E}
 		{9785C838-6536-46C3-8E92-8D3B570BB565} = {C6AA7548-9A38-4B2F-857A-98D0A0CF929E}
 		{6585C580-612E-4B87-A169-55DECE479C40} = {C6AA7548-9A38-4B2F-857A-98D0A0CF929E}
-		{BAB00BF5-40B9-49EC-8D5D-4D7FAB3F95E9} = {BD76A78B-9170-40D9-B989-F066A52DC756}
 		{51729BB9-6DFD-4739-864F-12B2178EE943} = {BD76A78B-9170-40D9-B989-F066A52DC756}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
