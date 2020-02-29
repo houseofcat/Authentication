@@ -10,7 +10,7 @@ The projects were designed to be working locally (Kestrel), some issues will occ
 ### C01_CookieBasic  
 Project for working out a basic Cookie authentication with AspNetCore.  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/01_BasicCookie/README.md)  
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/C01_CookieBasics/README.md)  
 
 ### C02_CookieAuthPolicy  
 Project for using cookies, claims, and roles, to authenticate properly.  
@@ -20,17 +20,17 @@ Project for using cookies, claims, and roles, to authenticate properly.
 ### I01_BasicIdentity  
 Project for working out a basic Cookie authentication with AspNetCore, EntityFramework Core, and AspNetCore Identity.  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/02_BasicIdentity/README.md)  
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/I01_IdentityBasics/README.md)  
 
 ### I02_IdentityEmailConfirm  
 A continuation of I01_BasicIdentity but adding in Email functionality from AspNetCore Identity and MailKit.  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/03_IdentityEmailConfirm/README.md)   
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/I02_IdentityEmailConfirm/README.md)   
 
 ### I03_IdentityResetPassword  
 A continuation of I02_IdentityEmailConfirm, making structural changes to the code, adding ForgotPassword and ResetPassword functionality.  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/04_IdentityResetPassword/README.md)  
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x/I03_IdentityResetPassword/README.md)  
 
 ### IS401_IdentityServerBasics 
 A new project to show how to start using IdentityServer4.  
@@ -42,7 +42,7 @@ A continuation of IS401_IdentityServerBasics to show how to start using Identity
 
 [More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS402_IdentityServerMvcClient/README.md)  
 
-### IS403_IdentityServerAspNetIdentity
-A continuation of IS402_IdentityServerMvcClient to show how to continue with OpenId authentication/login and utilizing AspNetCore Identity.  
+### IS403_IdentityServer_AspNetIdentity_SqlServer
+A continuation of IS402_IdentityServerMvcClient to show how to setup Serilog, AspNetIdentity, and SqlServer with IdentityServer4.  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS402_IdentityServerMvcClient/README.md)  
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS403_IdentityServer_AspNetIdentity_SqlServer/README.md)  
