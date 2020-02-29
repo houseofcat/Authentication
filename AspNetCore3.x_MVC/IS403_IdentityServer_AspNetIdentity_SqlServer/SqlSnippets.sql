@@ -17,6 +17,7 @@ FROM [IdentityLogging].[dbo].[IdentityServer]
 ------------------------------------
 
 -- Creating a bunch of DROP table scripts as the output
+-- Based on the Schema 'Identity' stored in @Schema
 USE [Identity]
 
 DECLARE @SqlStatement NVARCHAR(MAX)

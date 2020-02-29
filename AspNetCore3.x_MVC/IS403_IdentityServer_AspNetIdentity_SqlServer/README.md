@@ -14,19 +14,34 @@
  * Generating EF Core Migrations.
  * Creating a method on Startup (If Debug) to try and build out Database.
 
-## SqlServer
-This project will start using a Database but I will not demonstrate the steps to install it well.  
+## SqlServer 2019
+This project will start using a Database but I will not fully detail the steps to install it well.  
+Under `DBSetup_Server` folder, I did demonstrate a quick and dirty way to do a quick local install.  
 
 Database Version: Sql Server 2019 Developer Edition.  
 The Developer edition is free for development purposes.  
   
-1.) Link: https://www.microsoft.com/en-us/sql-server/sql-server-downloads  
-2.) Click `Download 2019 Developer edition`  
-3.) I have included a simple generic new Database Window screenshot - just make sure your account is owner.  
+Link: https://www.microsoft.com/en-us/sql-server/sql-server-downloads  
+
+Click `Download 2019 Developer edition`  
+
+## SqlServer 2019 Management
+Today there are a couple of tools you could use, I am going to stick with the main two for now.  
+
+You should get familiar with browsing and exploring your local databases anyways as this will prepare you for working with production databases located elsewhere.  
+
+**Sql Server Management Studio 2018 (SSMS 2018)**  
+Link: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15  
+
+Inside SSMS 2018
+I have included a simple generic new Database Window screenshot - just make sure your account is owner of the database.  
 ***Alternatively, you could run the included Database build script that may or may not work for you. These things break or stop working all the time when changing versions.***  
 
 The included CreateDatabase scripts are based on what you see in `ConnectionStrings` in `appSetttings.json`.  
 I took screenshots to give you an idea of what it generates.
+
+**Azure Data Studio (formerly SQL Operations Studio)**  
+Link: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15  
 
 ## List of Dependencies For Serilog, IdentityServer4, EF, AspNetIdentity
 Please review these new dependencies and proceed when you feel comfortable with what all is what. Review Startup.cs/ConfigureExtensions.cs  
@@ -75,7 +90,8 @@ dotnet tool update --global dotnet-ef --version 3.1.2
 ```
 
 ### Build Out Your Migrations
-This will take the two classes (that come from IdentityServer library) and your own AppDbContext to structure out the code version of how your Database should look.  
+This will take the two classes (that come from IdentityServer library) and your own AppDbContext to  
+structure out the code version of how your Database should look.  
 
 ```powershell
                                                               # Full Name Space To AppDbContext

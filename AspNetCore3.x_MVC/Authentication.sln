@@ -41,11 +41,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMvcClient", "IS402_Iden
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS403_IdentityServer_AspNetIdentity_SqlServer", "IS403_IdentityServer_AspNetIdentity_SqlServer", "{BD76A78B-9170-40D9-B989-F066A52DC756}"
 	ProjectSection(SolutionItems) = preProject
-		IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityDatabase.sql = IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityDatabase.sql
-		IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityLoggingDatabase.sql = IS403_IdentityServer_AspNetIdentity_SqlServer\CreateIdentityLoggingDatabase.sql
-		IS403_IdentityServer_AspNetIdentity_SqlServer\DataStructure.PNG = IS403_IdentityServer_AspNetIdentity_SqlServer\DataStructure.PNG
-		IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_Identity.PNG = IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_Identity.PNG
-		IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_IdentityLogging.PNG = IS403_IdentityServer_AspNetIdentity_SqlServer\NewDatabaseWindow_IdentityLogging.PNG
 		IS403_IdentityServer_AspNetIdentity_SqlServer\README.md = IS403_IdentityServer_AspNetIdentity_SqlServer\README.md
 		IS403_IdentityServer_AspNetIdentity_SqlServer\SqlSnippets.sql = IS403_IdentityServer_AspNetIdentity_SqlServer\SqlSnippets.sql
 	EndProjectSection
