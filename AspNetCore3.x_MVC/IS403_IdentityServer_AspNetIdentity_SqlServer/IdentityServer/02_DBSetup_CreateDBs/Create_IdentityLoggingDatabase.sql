@@ -1,9 +1,9 @@
 ﻿CREATE DATABASE [IdentityLogging]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'IdentityLogging', FILENAME = N'C:\DB\Databases\IdentityLogging.mdf' , SIZE = 8192KB , FILEGROWTH = 65536KB )
+( NAME = N'IdentityLogging', FILENAME = N'C:\Databases\HouseCat\IdentityLogging.mdf' , SIZE = 8192KB , FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'IdentityLogging_log', FILENAME = N'C:\DB\DatabaseLogs\IdentityLogging_log.ldf' , SIZE = 8192KB , FILEGROWTH = 65536KB )
+( NAME = N'IdentityLogging_log', FILENAME = N'C:\Databases\HouseCatLog\IdentityLogging_log.ldf' , SIZE = 8192KB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [IdentityLogging] SET COMPATIBILITY_LEVEL = 150
 GO
