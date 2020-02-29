@@ -30,7 +30,7 @@ table.
  7.) Verify the migration created tables under `Identity` database.  
 
 ### SqlServer 2019
-This project will start using a Database but I will not fully detail the steps to install it well.  
+This project will start using a Database but **I will not fully detail the steps to install it well.**  
 Under `DBSetup_Server` folder, I did demonstrate a quick and dirty way to do a quick local install.  
 
 Database Version: Sql Server 2019 Developer Edition.  
