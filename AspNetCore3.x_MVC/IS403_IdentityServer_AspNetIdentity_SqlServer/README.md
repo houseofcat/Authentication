@@ -14,17 +14,19 @@
  * Generating EF Core Migrations.
  * Creating a method on Startup (If Debug) to try and build out Database.
 
-## Note
-THIS project will start using a Database. Sql Server 2019. Which you can download and use for development purposes for free.  
+## SqlServer
+This project will start using a Database but I will not demonstrate the steps to install it well.  
 
-Download  
-1.) https://www.microsoft.com/en-us/sql-server/sql-server-downloads  
+Database Version: Sql Server 2019 Developer Edition.  
+The Developer edition is free for development purposes.  
+  
+1.) Link: https://www.microsoft.com/en-us/sql-server/sql-server-downloads  
 2.) Click `Download 2019 Developer edition`  
-3.) I have included a generic new Database Window screenshot. Super simple setup out of the box. Make sure your account is owner.  
+3.) I have included a simple generic new Database Window screenshot - just make sure your account is owner.  
 ***Alternatively, you could run the included Database build script that may or may not work for you. These things break or stop working all the time when changing versions.***  
 
 The included CreateDatabase scripts are based on what you see in `ConnectionStrings` in `appSetttings.json`.  
-I also included screen shots to give you a visual on what to expect on the final output.  
+I took screenshots to give you an idea of what it generates.
 
 ## List of Dependencies For Serilog, IdentityServer4, EF, AspNetIdentity
 Please review these new dependencies and proceed when you feel comfortable with what all is what. Review Startup.cs/ConfigureExtensions.cs  
@@ -49,7 +51,7 @@ Please review these new dependencies and proceed when you feel comfortable with 
 **AspNetIdentity is inside NetCoreApp3.1, do not include the 2.x.x Nuget packages.**
 
 ## EntityFramework Tools
-You need to have this installed on your machine.  
+You need to have this installed on your machine for Entity Framework migrations.  
 https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet  
 
 Also added package to this project (dotnet add package Microsoft.EntityFrameworkCore.Design)  
@@ -68,7 +70,7 @@ Also added package to this project (dotnet add package Microsoft.EntityFramework
 
 
 ### Build Out Your Migrations
-This will take the two classes that come from IdentityServer library and your own AppDbContext and structure out the code version of how your Database should look like.  
+This will take the two classes (that come from IdentityServer library) and your own AppDbContext to structure out the code version of how your Database should look.  
 
                                                               # Full Name Space To AppDbContext
     dotnet ef migrations add Initial_AppDbContextMigration -c IdentityServer.Data.AppDbContext -o Data/Migrations/ApplicationDb  
