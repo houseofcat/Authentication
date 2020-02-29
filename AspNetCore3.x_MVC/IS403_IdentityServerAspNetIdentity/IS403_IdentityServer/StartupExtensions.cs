@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace IS403_IdentityServer
 {
     // Helps declutter Startup.cs
-    public static class ConfigureExtensions
+    public static class StartupExtensions
     {
         // Useful if you want to have custom environments manually loaded.
         public static IConfiguration CreateConfiguration(this IServiceCollection services)
@@ -61,7 +61,7 @@ namespace IS403_IdentityServer
 
                 // User settings.
                 options.User.AllowedUserNameCharacters =
-                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._!@#$%^&*| ";
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._!@#$^&| ";
                 options.User.RequireUniqueEmail = true;
             });
         }
@@ -80,11 +80,11 @@ namespace IS403_IdentityServer
                         options.Events.RaiseFailureEvents = true;
                         options.Events.RaiseSuccessEvents = true;
                     })
-                .AddDeveloperSigningCredential() // used for signging tokens (not to be used in prod)
+                .AddDeveloperSigningCredential() // used for signing tokens (not to be used in prod)
                 .AddConfigurationStore(
                     options =>
                     {
-                        options.DefaultSchema = "Identity";
+                        options.DefaultSchema = "Identity"; // Sets the Schema for IdentityServer4 tables.
                         options.ConfigureDbContext = builder =>
                             builder.UseSqlServer(
                                 connectionString,
@@ -98,7 +98,7 @@ namespace IS403_IdentityServer
                                 connectionString,
                                 sql => sql.MigrationsAssembly(migrationsAssembly));
 
-                        options.DefaultSchema = "Identity";
+                        options.DefaultSchema = "Identity"; // Sets the Schema for IdentityServer4 tables.
                         options.EnableTokenCleanup = true;
                         options.TokenCleanupInterval = 30;
                     })

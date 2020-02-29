@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
 
 namespace IS403_IdentityServer
 {
@@ -38,11 +37,7 @@ namespace IS403_IdentityServer
 
             app.UseIdentityServer();
 
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapDefaultControllerRoute();
-                });
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
         }
     }
 }
