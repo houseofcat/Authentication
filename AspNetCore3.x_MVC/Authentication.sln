@@ -54,6 +54,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS404_IdentityServer_AspNet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IS404_IdentityServer_AspNetIdentity_CustomUser\IdentityServer\IdentityServer.csproj", "{AB8C42AF-CDA8-40BF-B07A-FCA2011CDCE0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS405_IdentityServer_AspNetIdentity_StoredProcedures", "IS405_IdentityServer_AspNetIdentity_StoredProcedures", "{ADFD71AA-456E-4215-9710-3F9949AF1C45}"
+	ProjectSection(SolutionItems) = preProject
+		IS405_IdentityServer_AspNetIdentity_StoredProcedures\README.md = IS405_IdentityServer_AspNetIdentity_StoredProcedures\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IS405_IdentityServer_AspNetIdentity_StoredProcedures\IdentityServer\IdentityServer.csproj", "{30A4037E-4D99-406B-A9A9-8FE147CAE5DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +123,10 @@ Global
 		{AB8C42AF-CDA8-40BF-B07A-FCA2011CDCE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB8C42AF-CDA8-40BF-B07A-FCA2011CDCE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB8C42AF-CDA8-40BF-B07A-FCA2011CDCE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30A4037E-4D99-406B-A9A9-8FE147CAE5DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A4037E-4D99-406B-A9A9-8FE147CAE5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30A4037E-4D99-406B-A9A9-8FE147CAE5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30A4037E-4D99-406B-A9A9-8FE147CAE5DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +141,7 @@ Global
 		{6585C580-612E-4B87-A169-55DECE479C40} = {C6AA7548-9A38-4B2F-857A-98D0A0CF929E}
 		{51729BB9-6DFD-4739-864F-12B2178EE943} = {BD76A78B-9170-40D9-B989-F066A52DC756}
 		{AB8C42AF-CDA8-40BF-B07A-FCA2011CDCE0} = {CF9B441E-C961-4942-9834-26A7EFF4299D}
+		{30A4037E-4D99-406B-A9A9-8FE147CAE5DD} = {ADFD71AA-456E-4215-9710-3F9949AF1C45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44A3A921-F735-4C8F-AC12-29D971150B1C}

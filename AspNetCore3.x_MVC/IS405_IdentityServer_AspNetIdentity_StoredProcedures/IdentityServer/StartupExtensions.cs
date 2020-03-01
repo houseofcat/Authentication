@@ -12,20 +12,19 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using IdentityServer.Identity;
 
 namespace IdentityServer
 {
-    // Helps declutter Startup.cs
     public static class StartupExtensions
     {
-        // Useful if you want to have custom environments manually loaded.
         public static IConfiguration CreateConfiguration(this IServiceCollection services)
         {
             var config = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
                     .AddJsonFile($"appsettings.{ServiceUtils.Env}.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables() // optional - allows you to read the system environment variables inside your app.
+                    .AddEnvironmentVariables()
                     .Build();
 
             services.AddSingleton(config);
@@ -33,20 +32,18 @@ namespace IdentityServer
             return config;
         }
 
-        // Configuring everything we need for AspNetIdentity to work.
         public static void ConfigureAspNetIdentity(this IServiceCollection services, string connectionString)
         {
             services
                 .AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
             services
-                .AddIdentity<IdentityUser, IdentityRole>() // Default user / role object.
+                .AddIdentity<UserIdentity, UserRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
-                // Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
@@ -54,19 +51,16 @@ namespace IdentityServer
                 options.Password.RequiredLength = 8;
                 options.Password.RequiredUniqueChars = 4;
 
-                // Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
 
-                // User settings.
                 options.User.AllowedUserNameCharacters =
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._!@#$^&| ";
                 options.User.RequireUniqueEmail = true;
             });
         }
 
-        // Configure everything we need for IdentityServer4 to work and with AspNetIdentity.
         public static void ConfigureIdentityServer(this IServiceCollection services, string connectionString)
         {
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
@@ -84,8 +78,8 @@ namespace IdentityServer
                 .AddConfigurationStore(
                     options =>
                     {
-                        options.DefaultSchema = "Identity"; // Sets the Schema for IdentityServer4 tables.
-                        options.ConfigureDbContext = builder => // Configures IdentityServer4 to use SqlServer for the ConfigurationStore.
+                        options.DefaultSchema = "Identity";
+                        options.ConfigureDbContext = builder =>
                             builder.UseSqlServer(
                                 connectionString,
                                 sql => sql.MigrationsAssembly(migrationsAssembly));
@@ -93,19 +87,18 @@ namespace IdentityServer
                 .AddOperationalStore(
                     options =>
                     {
-                        options.ConfigureDbContext = builder => // Configures IdentityServer4 to use SqlServer for the OperationalStore.
+                        options.ConfigureDbContext = builder =>
                             builder.UseSqlServer(
                                 connectionString,
                                 sql => sql.MigrationsAssembly(migrationsAssembly));
 
-                        options.DefaultSchema = "Identity"; // Sets the Schema for IdentityServer4 tables.
+                        options.DefaultSchema = "Identity";
                         options.EnableTokenCleanup = true;
                         options.TokenCleanupInterval = 30;
                     })
-                .AddAspNetIdentity<IdentityUser>();
+                .AddAspNetIdentity<UserIdentity>();
         }
 
-        // Save EntityFramework Migrations, Update Resources.
         public static void InitializeDatabase(this IApplicationBuilder app)
         {
             Log.Logger.Information("Initializing the database...");
@@ -187,7 +180,6 @@ namespace IdentityServer
 
             await context.Database.MigrateAsync();
 
-            // TODO: Should Clients/Ids/Apis be in memory?
             if (!context.Clients.Any())
             {
                 foreach (var client in Resources.GetClients())
