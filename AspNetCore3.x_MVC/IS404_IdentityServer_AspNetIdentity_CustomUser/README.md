@@ -58,7 +58,7 @@ Everything is customizeable... ...but it's not all cleanly labeled in a single s
  * Program.cs \\ webhost enhanced with logging.
  * Startup.cs \\ App builder added Serilog request logging middleware.
 
-To see what's changed, try and focus on the `// comments`. Keep in mind really important items, like warnings, are generally left in. So it's good idea to focus on comments.  
+To see what's changed, try and focus on the `comments`. Keep in mind really important items, like warnings, are generally left in as well.
 
 Once everything has been set, the migrations have made, old stuff deleted, and you startup successfully with the new colorful console, you can view your tables and verify  
 changes have been made such as table name, propery name for primary key, or new fields have been added.  
