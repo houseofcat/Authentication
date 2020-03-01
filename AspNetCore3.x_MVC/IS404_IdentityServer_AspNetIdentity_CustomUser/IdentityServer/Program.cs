@@ -20,10 +20,8 @@ namespace IdentityServer
 
                 using (var scope = hostBuilder.Services.CreateScope())
                 {
-                    // Getting Configuration back out of DI Container.
                     var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
 
-                    // This Log.Logger is globaly accessible in your program.
                     Log.Logger = new LoggerConfiguration()
                         .MinimumLevel.Debug()
                         .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -34,9 +32,8 @@ namespace IdentityServer
                         .ReadFrom.Configuration(configuration)
                         .CreateLogger();
 
-                    if (ServiceUtils.IsDebug) // simplified if Debug
+                    if (ServiceUtils.IsDebug)
                     {
-                        // Add additional diagnostics.
                         Serilog.Debugging.SelfLog.Enable(Console.WriteLine);
                     }
 
@@ -59,6 +56,7 @@ namespace IdentityServer
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog() // ADDING SERILOG LOGGING TO THE HOST
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

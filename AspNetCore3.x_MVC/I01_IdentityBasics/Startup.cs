@@ -18,7 +18,7 @@ namespace _02_BasicIdentity
             });
 
             // Adding AspNetCore Identity
-            services      // Default User / Role Object - could have been custom
+            services      // Default User / Role Object - could have been custom users and roles demonstrated later.
                 .AddIdentity<IdentityUser, IdentityRole>(
                     options =>
                     {

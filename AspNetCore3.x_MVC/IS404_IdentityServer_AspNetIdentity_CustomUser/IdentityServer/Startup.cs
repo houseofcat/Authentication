@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace IdentityServer
 {
@@ -30,8 +31,10 @@ namespace IdentityServer
 
             if (ServiceUtils.IsDebug)
             {
-                app.InitializeDatabase(); // TODO: Make async.
+                app.InitializeDatabase();
             }
+
+            app.UseSerilogRequestLogging(); // SERILOG LOGGING REQUESTS
 
             app.UseRouting();
 

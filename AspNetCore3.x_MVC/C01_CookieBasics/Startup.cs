@@ -15,17 +15,7 @@ namespace _01_Basics
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddAuthentication(
-                    options =>
-                    {
-                        options.RequireAuthenticatedSignIn = false; // AspNetCore 3.1 and simple cookie auth (without a login) needs to be false.
-                        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultForbidScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    })
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(
                     CookieAuthenticationDefaults.AuthenticationScheme,
                     config =>

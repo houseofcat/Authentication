@@ -133,7 +133,6 @@ namespace IdentityServer
 
             context.Database.Migrate();
 
-            // TODO: Should Clients/Ids/Apis be in memory?
             if (!context.Clients.Any())
             {
                 foreach (var client in Resources.GetClients())

@@ -139,7 +139,16 @@ https://dotnet.microsoft.com/download/dotnet-core/3.1
 
 ## Sources
 
+IdentityServer4 Doc - Logging  
+https://identityserver4.readthedocs.io/en/latest/topics/logging.html  
+
 Microsoft Doc - Entity Framework Core tools reference - .NET CLI
 https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet  
+
+Microsoft Doc - EF Migrations
+https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+
+Microsoft Doc - Configure ASP.NET Core Identity
+https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-3.1
 
 ...and just from my own noggin.
