@@ -22,9 +22,9 @@ namespace IdentityServer.Data
                     b.Ignore(u => u.Id); // Do not use this OLD property.
                     // if you forget to Ignore properties this will also be included
                     // in the sql tables alongside your new property (in this case the
-                    // table would have Id and UserId
+                    // table would have Id and UserId) and thats just confusing.
 
-                    b.ToTable("UserIdentities"); // Specifying a plural name because we like that.
+                    b.ToTable("UserIdentities"); // Specifying a plural Table name because we like that.
 
                     b.HasKey(u => u.UserId); // Our new UserId property is a Primary Key.
 
@@ -38,7 +38,7 @@ namespace IdentityServer.Data
                 }
             );
 
-            builder.Entity<UserRole>( // our new UserIdentity Class
+            builder.Entity<UserRole>( // our new UserRole Class
                 b =>
                 {
                     b.ToTable("Roles"); // Specifying a new Table name because I like plurals.

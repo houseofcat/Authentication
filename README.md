@@ -50,4 +50,4 @@ A continuation of IS402_IdentityServerMvcClient to show how to setup Serilog, As
 ### IS404_IdentityServer_AspNetIdentity_CustomUser
 A continuation of IS403_IdentityServer_AspNetIdentity_SqlServer with prettier logging, custom IdentityUser/IdentityRole, change primary key type, and more!  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS404_IdentityServer_AspNetIdentity_CustomUser/)
+[More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS404_IdentityServer_AspNetIdentity_CustomUser/)  

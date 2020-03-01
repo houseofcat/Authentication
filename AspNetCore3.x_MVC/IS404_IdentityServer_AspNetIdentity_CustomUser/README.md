@@ -50,6 +50,14 @@ PRINT @SqlStatement
 ## The General Theme With AspNetIdentity
 Everything is customizeable... ...but it's not all cleanly labeled in a single spot or demonstrated.   
 
+ * Data\AppDbContext.cs \\ modified
+ * Identity\UserIdentity.cs \\ new
+ * Identity\UserRole.cs \\ new
+ * StartupExtensions.cs \\ modified
+ * Data\Migrations\* \\ all freshly minted
+ * Program.cs \\ webhost enhanced with logging.
+ * Startup.cs \\ App builder added Serilog request logging middleware.
+
 To see what's changed, try and focus on the `// comments`. Keep in mind really important items, like warnings, are generally left in. So it's good idea to focus on comments.  
 
 Once everything has been set, the migrations have made, old stuff deleted, and you startup successfully with the new colorful console, you can view your tables and verify  
