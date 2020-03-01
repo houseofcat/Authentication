@@ -35,14 +35,19 @@ A continuation of I02_IdentityEmailConfirm, making structural changes to the cod
 ### IS401_IdentityServerBasics 
 A new project to show how to start using IdentityServer4.  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS401_IdentityServerBasics/README.md)  
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS401_IdentityServerBasics/)  
 
 ### IS402_IdentityServerMvcClient  
 A continuation of IS401_IdentityServerBasics to show how to start using IdentityServer4 with OpenId (but stops at the login.)  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS402_IdentityServerMvcClient/README.md)  
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS402_IdentityServerMvcClient/)  
 
 ### IS403_IdentityServer_AspNetIdentity_SqlServer
 A continuation of IS402_IdentityServerMvcClient to show how to setup Serilog, AspNetIdentity, and SqlServer with IdentityServer4.  
 
-[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS403_IdentityServer_AspNetIdentity_SqlServer/README.md)  
+[More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS403_IdentityServer_AspNetIdentity_SqlServer/)  
+
+### IS404_IdentityServer_AspNetIdentity_CustomUser
+A continuation of IS403_IdentityServer_AspNetIdentity_SqlServer with prettier logging, custom IdentityUser/IdentityRole, change primary key type, and more!  
+
+[More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS404_IdentityServer_AspNetIdentity_CustomUser/)
