@@ -19,13 +19,43 @@ That is, in order to work out of the box.
 This project is based on having EF.Core & Tools already setup.  
 That you have taken care of SqlServer (or written your own connection strings and data persistence layer).  
 
-I recommend purging the last set of migrations and running the new migrations checked in.
+I recommend purging the last set of migrations and running the new migrations checked in. To do that you generally have to remove  
+the entries from the `dbo.__EFMigrationsHistory` table and to delete all the `Identity` tables. You can leave `IdentityLogging` alone  
+or purge the old entries. To help drop tables, there is a script in the sql scripts from last time.   
+
+My philosophy has always been `nuke the site from orbit, just to be sure.`  
+
+```tsql
+------------------------------------
+------------------------------------
+
+-- Creating a bunch of DROP table scripts as the output
+-- Based on the Schema 'Identity' stored in @Schema
+USE [Identity]
+
+DECLARE @SqlStatement NVARCHAR(MAX)
+DECLARE @Schema VARCHAR(32) = 'Identity'
+
+SELECT @SqlStatement = 
+    COALESCE(@SqlStatement, N'') + N'DROP TABLE IF EXISTS [' + @Schema +'].' + QUOTENAME(TABLE_NAME) + N';' + CHAR(13)
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = @Schema and TABLE_TYPE = 'BASE TABLE'
+
+PRINT @SqlStatement
+
+------------------------------------
+------------------------------------
+```
 
 ## The General Theme With AspNetIdentity
-Everything is customizeable... ...but it's not all cleanly labeled in a single spot or demonstrated.  
+Everything is customizeable... ...but it's not all cleanly labeled in a single spot or demonstrated.   
 
-To see whats changed try and focus on the comments. Keep in mind really important stuff is generally left in. So its not a law but a good rule of thumb is that a comment
-pertains to whats being changed for this project.
+To see what's changed, try and focus on the `// comments`. Keep in mind really important items, like warnings, are generally left in. So it's good idea to focus on comments.  
+
+Once everything has been set, the migrations have made, old stuff deleted, and you startup successfully with the new colorful console, you can view your tables and verify  
+changes have been made such as table name, propery name for primary key, or new fields have been added.  
+
+A `verification.PNG` was added to show what to look for.  
 
 ## Sources
 
