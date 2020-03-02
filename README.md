@@ -56,3 +56,8 @@ A continuation of IS403_IdentityServer_AspNetIdentity_SqlServer with prettier lo
 A continuation of IS404_IdentityServer_AspNetIdentity_CustomUser with replacing some EntityFramework with SqlServer stored procedures.
 
 [More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS405_IdentityServer_AspNetIdentity_StoredProcedures/)  
+
+### IS406_IdentityServer
+A focus back on IdentityServer (with AspNetIdentity, SqlServer, and Serilog) authentication and authorization.  
+
+[More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS406_IdentityServer/)  

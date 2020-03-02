@@ -46,23 +46,51 @@ PRINT @SqlStatement
 
 ## Replacing UserStore / RoleStore
 Pretty much anything in EntityFrameworkCore can be replaced with your own signature style. In this  
-particular project, we are replacing two stores that use AspNetIdentity leverages EF.Core to run 
+particular project, we are replacing two stores that use AspNetIdentity leverages EF.Core to run  
 queries on users and role. Instead, we would rather execute our custom written stored procedures.  
 
 The reasons one may do this vary...  
 
 It could be because you don't like Entity Framework.  
 Maybe you prefer to use Dapper with StoredProcedures.  
+Maybe you are trying to re-use older Users and Schemas that already exist in different objects/tables.  
 Maybe your DBA forces you to use StoredProcedures/Tables that are tweaked to their specification.  
 Maybe you just want the ability to update StoredProcedures on the fly to fix bugs?  
 The reason isn't really the problem, it's the `how do I do this?` that's the problem.  
 
+We don't have any functioning features yet like create user or login pages... so I will revisit it to  
+make sure its working later on.  
+
 ## UserStore / RoleStore
-Uses stored procedures instead of EF Core. It accomplishes this and mapping with DataSource (a wrapping class)  
-for DapperHelper (which in turn is a wrapper for Dapper). Completely unnecessary and overkill but I had this  
-code already written though from a gist so I used it  
+Both are using `storedprocedures` instead of EF Core. It accomplishes this with some helper classes.  
+
+DataSource (a wrapping class) for DapperHelper.  
+DapperHelper, which in turn, is a wrapper for Dapper.  
+Completely overkill but I had this code already written though from a gist so I used it.  
 
 I also demonstrate FastMember for quick object property to parameter mapping.  
+
+## Stored Procedures
+
+List of generalized stored procedures for you to use under the StoredProcedures folder.  
+
+These stored procedures could be named whatever you want but you will have to update the names  
+in code.  
+
+```
+Identity.UserIdentity_Create.sql
+Identity.UserIdentity_Delete.sql
+Identity.UserIdentity_FindByEmail.sql
+Identity.UserIdentity_FindById.sql
+Identity.UserIdentity_FindByName.sql
+Identity.UserIdentity_Update.sql
+
+Identity.UserRole_Create.sql
+Identity.UserRole_Delete.sql
+Identity.UserRole_FindById.sql
+Identity.UserRole_FindByName.sql
+Identity.UserRole_Update.sql
+```
 
 ## Sources
 
