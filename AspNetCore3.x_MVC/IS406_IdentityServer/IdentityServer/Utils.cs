@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace IdentityServer
 {
-    public static class ServiceUtils
+    public static class Utils
     {
         public static bool IsDebug
         {

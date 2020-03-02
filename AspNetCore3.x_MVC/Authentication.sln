@@ -63,6 +63,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IS405_Ide
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IS406_IdentityServer", "IS406_IdentityServer", "{0F20D1A1-409C-4915-8010-FBA683C3F015}"
 	ProjectSection(SolutionItems) = preProject
+		IS406_IdentityServer\IS406_IdentityServer.postman_collection.json = IS406_IdentityServer\IS406_IdentityServer.postman_collection.json
 		IS406_IdentityServer\README.md = IS406_IdentityServer\README.md
 	EndProjectSection
 EndProject

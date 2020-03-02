@@ -1,8 +1,8 @@
 $Url = "https://localhost:5001/api/v1/account/create"
 
 $Body = @{
-    "UserName" = "cat@houseofcat.io"
-    "Email" = "cat@houseofcat.io"
+    "UserName" = "test@email.io"
+    "Email" = "test@email.io"
     "Password" = "Test_password1"
 }
 

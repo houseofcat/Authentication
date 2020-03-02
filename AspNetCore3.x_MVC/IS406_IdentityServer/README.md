@@ -13,6 +13,9 @@ focus back to Authentication/Authorization.
 To do that, we are keeping Sql Server, Serilog, and other enhancements. We are removing all the custom  
 replacement classes and switching back to the built-ins.  
 
+## Help
+I have included a PowerShell script to create a user or you can use the Postman collection provided.  
+
 ## Sources
 
 Microsoft Doc - Invoke-RestMethod

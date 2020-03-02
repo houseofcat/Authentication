@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using IdentityServer.Requests;
-using IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +15,7 @@ namespace IdentityServer.Controllers
     public class AccountController : ControllerBase
     {
         private IMapper Mapper { get; }
-        private IUserService UserService { get; }
+        private UserManager<IdentityUser> UserManager { get; }
 
         #region Constants
         private const string UserCreatedTemplate = "Sucessfully created user {0}.";
@@ -26,10 +25,10 @@ namespace IdentityServer.Controllers
 
         public AccountController(
             IMapper mapper,
-            IUserService userService)
+            UserManager<IdentityUser> userManager)
         {
             Mapper = mapper;
-            UserService = userService;
+            UserManager = userManager;
         }
 
         [HttpPost]
@@ -44,23 +43,23 @@ namespace IdentityServer.Controllers
 
             IdentityResult identityResult;
             try
-            { identityResult = await UserService.CreateUserAsync(identityUser, request.Password); }
+            { identityResult = await UserManager.CreateAsync(identityUser, request.Password); }
             catch (Exception ex)
             {
-                var errorMessage = ServiceUtils.Write(UserCreatedFailedTemplate, identityUser.Email);
+                var errorMessage = Utils.Write(UserCreatedFailedTemplate, identityUser.Email);
                 Log.Logger.Error(ex, errorMessage);
                 return BadRequest(errorMessage);
             }
 
             if (identityResult.Succeeded)
             {
-                var logMessage = ServiceUtils.Write(UserCreatedTemplate, identityUser.Email);
+                var logMessage = Utils.Write(UserCreatedTemplate, identityUser.Email);
                 Log.Logger.Information(logMessage);
                 return Ok(logMessage);
             }
             else
             {
-                var errorMessage = ServiceUtils.Write(UserCreatedFailedTemplate, identityUser.Email);
+                var errorMessage = Utils.Write(UserCreatedFailedTemplate, identityUser.Email);
                 var badRequest = BadRequest(errorMessage);
 
                 // Add additional details to internal logging - but not to the BadRequest message.

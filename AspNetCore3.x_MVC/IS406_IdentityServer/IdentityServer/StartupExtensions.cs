@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using IdentityServer.Data;
-using IdentityServer.Services;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
@@ -24,7 +23,7 @@ namespace IdentityServer
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
-                .AddJsonFile($"appsettings.{ServiceUtils.Env}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{Utils.Env}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
 
@@ -107,12 +106,26 @@ namespace IdentityServer
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IUserService>(s =>
-            {
-                return new UserService(
-                    s.GetRequiredService<UserManager<IdentityUser>>(),
-                    s.GetRequiredService<SignInManager<IdentityUser>>());
-            });
+
+            // The definition UserManager<IdentityUser> and SignInManager<IdentityUser>
+            // require a Scope resolve from Dependency Injection.
+
+            // If you were to go with custom classes akin to Services that have
+            // UserManager (et cetera) as dependencies, the service can only be added
+            // properly with AddScoped. If your service was designed as a singleton, 
+            // this could effect performance significantly. You may need to find a work
+            // around in such a case (i.e. using custom AspNet classes.).
+
+            // Example.) Service being added with AddSingleton will cause an InvalidOperationException.
+            //services.AddSingleton<IUserService>(s =>
+            //{
+            //    return new UserService(
+            //        s.GetRequiredService<UserManager<IdentityUser>>(),
+            //        s.GetRequiredService<SignInManager<IdentityUser>>());
+            //});
+
+            // So we will be using UserManager and SignInManager directly into the
+            // Controllers themselves.
         }
 
         public static void InitializeDatabase(this IApplicationBuilder app)

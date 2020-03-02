@@ -53,7 +53,7 @@ namespace IdentityServer
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
-            if (ServiceUtils.IsDebug) { Serilog.Debugging.SelfLog.Enable(Console.WriteLine); }
+            if (Utils.IsDebug) { Serilog.Debugging.SelfLog.Enable(Console.WriteLine); }
 
             Log.Information("Logger created. Starting IdentityServer...");
 
