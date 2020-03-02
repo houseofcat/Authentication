@@ -46,22 +46,23 @@ PRINT @SqlStatement
 
 ## Replacing UserStore / RoleStore
 Pretty much anything in EntityFrameworkCore can be replaced with your own signature style. In this  
-particular project, we are replacing two key components that use EF.Core to run queries against   
-users and role lookups. We would rather execute our custom stored procedures for instead.  
+particular project, we are replacing two stores that use AspNetIdentity leverages EF.Core to run 
+queries on users and role. Instead, we would rather execute our custom written stored procedures.  
 
-The reason one may do this varies. It could be because you don't like Entity Framework. Maybe you  
-prefer to use Dapper with StoredProcedures? Maybe your DBA forces you to use  
-StoredProcedures/Tables that are tweaked to their specification. Maybe you just want the ability  
-to update StoredProcedures on the fly to fix bugs? The reason isn't really the problem, it's the  
-`how do I do this?` that's the problem.  
+The reasons one may do this vary...  
+
+It could be because you don't like Entity Framework.  
+Maybe you prefer to use Dapper with StoredProcedures.  
+Maybe your DBA forces you to use StoredProcedures/Tables that are tweaked to their specification.  
+Maybe you just want the ability to update StoredProcedures on the fly to fix bugs?  
+The reason isn't really the problem, it's the `how do I do this?` that's the problem.  
 
 ## UserStore / RoleStore
 Uses stored procedures instead of EF Core. It accomplishes this and mapping with DataSource (a wrapping class)  
-for DapperHelper which in turn is a wrapper for Dapper. Completely unnecessary and overkill.  
+for DapperHelper (which in turn is a wrapper for Dapper). Completely unnecessary and overkill but I had this  
+code already written though from a gist so I used it  
 
-I had this code already written though from a gist.  
-
-I also demonstrate FastMember for quick object to parameter mapping.  
+I also demonstrate FastMember for quick object property to parameter mapping.  
 
 ## Sources
 
@@ -80,5 +81,5 @@ https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.entity
 Microsoft Github Source - RoleStore  
 https://github.com/dotnet/aspnetcore/blob/master/src/Identity/EntityFrameworkCore/src/RoleStore.cs  
 
-Microsoft Doc - Microsoft.AspNetCore.Identity.EntityFrameworkCore Namespace
-https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore?view=aspnetcore-3.0
+Microsoft Doc - Microsoft.AspNetCore.Identity.EntityFrameworkCore Namespace  
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore?view=aspnetcore-3.0  
