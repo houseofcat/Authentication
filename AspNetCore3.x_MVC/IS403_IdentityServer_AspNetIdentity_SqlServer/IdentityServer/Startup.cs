@@ -12,6 +12,7 @@ namespace IdentityServer
         {
             var config = services.CreateConfiguration();
 
+            // ASPNETIDENTITY CONFIGURATION MUST BE ABOVE IDENTITYSERVER
             services.ConfigureAspNetIdentity(config.GetConnectionString("Identity"));
             services.ConfigureIdentityServer(config.GetConnectionString("Identity"));
 

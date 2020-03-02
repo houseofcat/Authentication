@@ -16,6 +16,9 @@ namespace IdentityServer
             services.ConfigureAspNetIdentity(config.GetConnectionString("Identity"));
             services.ConfigureIdentityServer(config.GetConnectionString("Identity"));
 
+            // Adding our custom services to use alongside IdentityServer.
+            services.ConfigureServices();
+
             if (ServiceUtils.IsDebug)
             { services.AddControllersWithViews().AddRazorRuntimeCompilation(); }
             else

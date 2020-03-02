@@ -1,4 +1,6 @@
-﻿using IdentityServer.Data;
+﻿using AutoMapper;
+using IdentityServer.Data;
+using IdentityServer.Services;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
@@ -20,11 +22,11 @@ namespace IdentityServer
         public static IConfiguration CreateConfiguration(this IServiceCollection services)
         {
             var config = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
-                    .AddJsonFile($"appsettings.{ServiceUtils.Env}.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables()
-                    .Build();
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+                .AddJsonFile($"appsettings.{ServiceUtils.Env}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
 
             services.AddSingleton(config);
 
@@ -37,26 +39,30 @@ namespace IdentityServer
                 .AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
             services
-                .AddIdentity<IdentityUser, IdentityRole>()
+                .AddIdentity<IdentityUser, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequiredLength = 8;
+                    options.Password.RequiredUniqueChars = 4;
+
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
+
+                    options.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._!@#$^&| ";
+                    options.User.RequireUniqueEmail = true;
+                })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options =>
+            services.ConfigureApplicationCookie(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequiredUniqueChars = 4;
-
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
-
-                options.User.AllowedUserNameCharacters =
-                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._!@#$^&| ";
-                options.User.RequireUniqueEmail = true;
+                options.Cookie.Name = "IS406_IdentityServer.Cookie";
+                options.LoginPath = "/Auth/Login";
             });
         }
 
@@ -96,6 +102,17 @@ namespace IdentityServer
                         options.TokenCleanupInterval = 30;
                     })
                 .AddAspNetIdentity<IdentityUser>();
+        }
+
+        public static void ConfigureServices(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IUserService>(s =>
+            {
+                return new UserService(
+                    s.GetRequiredService<UserManager<IdentityUser>>(),
+                    s.GetRequiredService<SignInManager<IdentityUser>>());
+            });
         }
 
         public static void InitializeDatabase(this IApplicationBuilder app)
