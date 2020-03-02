@@ -41,7 +41,7 @@ namespace IdentityServer.Data
             builder.Entity<UserRole>( // our new UserRole Class
                 b =>
                 {
-                    b.ToTable("Roles"); // Specifying a new Table name because I like plurals.
+                    b.ToTable("UserRoles"); // Specifying a new Table name because I like plurals.
 
                     b
                     .Property(u => u.ConcurrencyStamp)

@@ -16,42 +16,15 @@ namespace IdentityServer
         {
             try
             {
-                var hostBuilder = CreateHostBuilder(args).Build();
-
-                using (var scope = hostBuilder.Services.CreateScope())
-                {
-                    var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-
-                    Log.Logger = new LoggerConfiguration()
-                        .MinimumLevel.Debug()
-                        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                        .MinimumLevel.Override("System", LogEventLevel.Warning)
-                        .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
-                        .Enrich.FromLogContext()
-                        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate)
-                        .ReadFrom.Configuration(configuration)
-                        .CreateLogger();
-
-                    if (ServiceUtils.IsDebug)
-                    {
-                        Serilog.Debugging.SelfLog.Enable(Console.WriteLine);
-                    }
-
-                    Log.Information("Logger created. Starting IdentityServer...");
-                }
-
-                await hostBuilder
-                    .RunAsync()
-                    .ConfigureAwait(false);
+                await CreateHostBuilder(args)
+                    .Build()
+                    .CreateSerilogLogger()
+                    .RunAsync();
             }
             catch (Exception ex)
-            {
-                Log.Fatal(ex, "Host terminated unexpectedly.");
-            }
+            { Log.Fatal(ex, "Host terminated unexpectedly."); }
             finally
-            {
-                Log.CloseAndFlush();
-            }
+            { Log.CloseAndFlush(); }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -61,5 +34,32 @@ namespace IdentityServer
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        public static IHost CreateSerilogLogger(this IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                    .MinimumLevel.Override("System", LogEventLevel.Warning)
+                    .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate)
+                    .ReadFrom.Configuration(configuration)
+                    .CreateLogger();
+
+                if (ServiceUtils.IsDebug)
+                {
+                    Serilog.Debugging.SelfLog.Enable(Console.WriteLine);
+                }
+
+                Log.Information("Logger created. Starting IdentityServer...");
+            }
+
+            return host;
+        }
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityServer.Data.Migrations.ApplicationDb
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200301010309_AppDbContextMigration")]
+    [Migration("20200302022203_AppDbContextMigration")]
     partial class AppDbContextMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,7 +136,7 @@ namespace IdentityServer.Data.Migrations.ApplicationDb
                         .HasName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Roles");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>

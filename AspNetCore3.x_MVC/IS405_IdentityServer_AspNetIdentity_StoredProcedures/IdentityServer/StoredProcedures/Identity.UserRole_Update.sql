@@ -1,16 +1,15 @@
 ﻿USE [Identity]
 GO
 
-DROP PROCEDURE IF EXISTS [Identity].[Role_Update]
+DROP PROCEDURE IF EXISTS [Identity].[UserRole_Update]
 GO
 
-CREATE PROCEDURE [Identity].[Role_Update]
+CREATE PROCEDURE [Identity].[UserRole_Update]
 (
-    @RoleId INT,
+    @Id BIGINT,
     @Name NVARCHAR(256),
     @NormalizedName NVARCHAR(256),
-    @CurrencyStamp NVARCHAR(MAX),
-    @RoleName NVARCHAR(256)
+    @CurrencyStamp NVARCHAR(MAX)
 )
 AS
 BEGIN
@@ -19,14 +18,14 @@ BEGIN
     SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
     UPDATE
-        [Identity].[Roles]
+        [Identity].[UserRoles]
     SET
         [Name] = @Name,
         [NormalizedName] = @NormalizedName,
         [ConcurrencyStamp] = @CurrencyStamp,
-        [RoleName] = @RoleName
+        [ModifiedDatetime] = GETUTCDATE()
     WHERE
-        RoleId = @RoleId
+        [Id] = @Id
 
 END
 GO

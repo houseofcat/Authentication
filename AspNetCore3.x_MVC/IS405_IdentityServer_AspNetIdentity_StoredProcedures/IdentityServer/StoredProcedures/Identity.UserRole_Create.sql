@@ -1,10 +1,10 @@
 ﻿USE [Identity]
 GO
 
-DROP PROCEDURE IF EXISTS [Identity].[Role_Create]
+DROP PROCEDURE IF EXISTS [Identity].[UserRole_Create]
 GO
 
-CREATE PROCEDURE [Identity].[Role_Create]
+CREATE PROCEDURE [Identity].[UserRole_Create]
 (
     @Name NVARCHAR(256),
     @NormalizedName NVARCHAR(256),
@@ -13,20 +13,20 @@ CREATE PROCEDURE [Identity].[Role_Create]
 AS
 BEGIN
 
-    INSERT INTO [Identity].[Roles]
+    INSERT INTO [Identity].[UserRoles]
     (
         [Name],
         [NormalizedName],
-		[ConcurrencyStamp],
+        [ConcurrencyStamp],
         [CreatedDatetime],
         [ModifiedDateTime]
     )
     VALUES
     (
         @Name,
-		@NormalizedName,
-		@ConcurrencyStamp,
-		GETUTCDATE(),
+        @NormalizedName,
+        @ConcurrencyStamp,
+        GETUTCDATE(),
         GETUTCDATE()
     )
 

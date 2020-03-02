@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using IdentityServer.Identity;
+using IdentityServer.Data.Stores;
 
 namespace IdentityServer
 {
@@ -59,6 +60,10 @@ namespace IdentityServer
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._!@#$^&| ";
                 options.User.RequireUniqueEmail = true;
             });
+
+            // Adding our Singleton versions of the new UserStore/RoleStore.
+            services.AddSingleton<IUserStore<UserIdentity>, UserStore>();
+            services.AddSingleton<IRoleStore<UserRole>, RoleStore>();
         }
 
         public static void ConfigureIdentityServer(this IServiceCollection services, string connectionString)

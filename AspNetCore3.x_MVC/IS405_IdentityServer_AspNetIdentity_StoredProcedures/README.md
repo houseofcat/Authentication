@@ -3,9 +3,12 @@
 ## Demonstrates
 
  * All of IS404_IdentityServer_AspNetIdentity_CustomUser  
- * Custom UserStore
- * Custom RoleStore
- * Replacing EntityFrameworkCore with Stored Procedures.
+ * Simplifying CreateSerilogLogger() in `Main`.
+ * Custom UserStore and Interface/function implementations.
+ * Custom RoleStore and Interface/function implementations.
+ * Added Stored Procedures.
+ * Dapper with wrappings and FastMember usage.
+ * An abstraction layer of DataSource.
 
 ## Requires Everything Setup From IS403
 That is, in order to work out of the box.  
@@ -41,12 +44,13 @@ PRINT @SqlStatement
 ```
 
 ## Replacing UserStore / RoleStore
-Pretty much anything in EntityFrameworkCore can be replaced with a custom version. In this particular project we are replacing  
-two key components that us EF.Core to run queries against users that we would rather execute our custom stored procedures for instead.  
+Pretty much anything in EntityFrameworkCore can be replaced with your own signature style. In this particular project, we are replacing  
+two key components that use EF.Core to run queries against users and role lookups. We would rather execute our custom stored procedures for instead.  
 
-The reason one may do this is because you don't like EF.Core. Maybe you like Dapper with StoredProcedures? Maybe your DBA forces  
-you to use StoredProcedures that are tweaked to their specification. Maybe you just want the ability to update StoredProcedures on  
-the fly to fix bugs? The reason isn't really the problem, it's the `how do I do this?` that's the problem.  
+The reason one may do this varies. It could be because you don't like Entity Framework. Maybe you prefer to use Dapper with StoredProcedures?  
+Maybe your DBA forces you to use StoredProcedures/Tables that are tweaked to their specification.  
+Maybe you just want the ability to update StoredProcedures on the fly to fix bugs?  
+The reason isn't really the problem, it's the `how do I do this?` that's the problem.  
 
 ## UserStore<TUser> || UserStore<UserIdentity> (our custom one)
 
