@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace IdentityServer.Data.Utils
 {
     // This wraps the ORM (DapperHelper -> Dapper) so that you could replace the ORM any time you want and never
-    // have dependencies directly on your Stores OR Repositories.
+    // have dependencies directly on your Stores OR Repositories to any single ORM.
 
-    // Furthermore this language much more closely aligns with developer concepts.
+    // Furthermore this language much more closely aligns with developer intended concepts.
     // Get vs. Query for example.
     // Update vs. Execute Non Scalar for example.
 

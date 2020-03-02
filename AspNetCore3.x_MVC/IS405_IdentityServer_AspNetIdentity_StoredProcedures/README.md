@@ -15,9 +15,10 @@ That is, in order to work out of the box.
 This project is based on having EF.Core & Tools already setup.  
 That you have taken care of SqlServer (or written your own connection strings and data persistence layer).  
 
-I recommend purging the last set of migrations and running the new migrations checked in. To do that you generally have to remove  
-the entries from the `dbo.__EFMigrationsHistory` table and to delete all the `Identity` tables. You can leave `IdentityLogging` alone  
-or purge the old entries. To help drop tables, there is a script in the sql scripts from last time.   
+I recommend purging the last set of migrations and running the new migrations checked in. To do that you  
+generally have to remove the entries from the `dbo.__EFMigrationsHistory` table and to delete all the  
+`Identity` tables. You can leave `IdentityLogging` alone or purge the old entries. To help drop tables,  
+there is a script in the sql scripts from last time.   
 
 My philosophy has always been `nuke the site from orbit, just to be sure.`  
 
@@ -44,16 +45,23 @@ PRINT @SqlStatement
 ```
 
 ## Replacing UserStore / RoleStore
-Pretty much anything in EntityFrameworkCore can be replaced with your own signature style. In this particular project, we are replacing  
-two key components that use EF.Core to run queries against users and role lookups. We would rather execute our custom stored procedures for instead.  
+Pretty much anything in EntityFrameworkCore can be replaced with your own signature style. In this  
+particular project, we are replacing two key components that use EF.Core to run queries against   
+users and role lookups. We would rather execute our custom stored procedures for instead.  
 
-The reason one may do this varies. It could be because you don't like Entity Framework. Maybe you prefer to use Dapper with StoredProcedures?  
-Maybe your DBA forces you to use StoredProcedures/Tables that are tweaked to their specification.  
-Maybe you just want the ability to update StoredProcedures on the fly to fix bugs?  
-The reason isn't really the problem, it's the `how do I do this?` that's the problem.  
+The reason one may do this varies. It could be because you don't like Entity Framework. Maybe you  
+prefer to use Dapper with StoredProcedures? Maybe your DBA forces you to use  
+StoredProcedures/Tables that are tweaked to their specification. Maybe you just want the ability  
+to update StoredProcedures on the fly to fix bugs? The reason isn't really the problem, it's the  
+`how do I do this?` that's the problem.  
 
-## UserStore<TUser> || UserStore<UserIdentity> (our custom one)
+## UserStore / RoleStore
+Uses stored procedures instead of EF Core. It accomplishes this and mapping with DataSource (a wrapping class)  
+for DapperHelper which in turn is a wrapper for Dapper. Completely unnecessary and overkill.  
 
+I had this code already written though from a gist.  
+
+I also demonstrate FastMember for quick object to parameter mapping.  
 
 ## Sources
 
