@@ -11,6 +11,8 @@
      * The settings are found `appsettings.json` and the table is `[IdentityLogging].[TestMvcClient]`  
  * Custom Middleware to better integrate with AspNetCore Request logging.  
  * Modifications to Serilog Logging table to add more columns and JSON (instead of XML).
+ * Replacing JsonFormatter with the Utf8Json one (nuget `Utf8Json.AspNetCoreMvcFormatter`).  
+ * Adding compression to ResponseBody.
 
 ## Taking A Step Back
 Things escalated pretty quick with all the customizations that went on, but now I want to bring the  
@@ -46,11 +48,16 @@ Example.) Service being added with AddSingleton will cause an InvalidOperationEx
     });
 
 So we will be using UserManager and SignInManager directly into the
-Controllers themselves.
+Controllers themselves.  
 
 ## Serilog
 Porbably best to delete all IdentityLogging tables before starting up. I have learned on how to get things  
 more desireable.
+
+## Caution: Response Compression with HTTPS
+Compressed responses over secure connections can be controlled with the EnableForHttps option, which is  
+`disabled by default`. Using compression with dynamically generated pages can lead to security problems  
+such as the CRIME and BREACH attacks.  
 
 ## Sources
 
@@ -80,3 +87,9 @@ https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=
 
 Github Serilog - Serilog.Sinks.MSSqlServer #CustomPropertyColumns  
 https://github.com/serilog/serilog-sinks-mssqlserver#custom-property-columns  
+
+Microsoft Doc - Response compression in ASP.NET Core  
+https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-3.1  
+
+Microsoft Doc - Response caching in ASP.NET Core  
+https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-3.1  

@@ -4,15 +4,20 @@ using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Utf8Json.AspNetCoreMvcFormatter;
+using Utf8Json.Resolvers;
 
 namespace IdentityServer
 {
@@ -104,11 +109,61 @@ namespace IdentityServer
                 .AddAspNetIdentity<IdentityUser>();
         }
 
+        public static void ConfigureControllers(this IServiceCollection services)
+        {
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true; // Needed until Utf8Json Mvc Formatters are updated.
+            });
+
+            if (Utils.IsDebug) // To Simplify Debugging we don't compress responses and we allow for Razor edits to be viewed at runtime.
+            {
+                services
+                    .AddControllersWithViews(
+                        options =>
+                        {
+                            options.OutputFormatters.Clear(); // Uses faster Utf8Json instead of built-ins.
+                            options.OutputFormatters.Add(new JsonOutputFormatter(StandardResolver.ExcludeNull));
+
+                            options.InputFormatters.Clear();
+                            options.InputFormatters.Add(new JsonInputFormatter());
+                        })
+                    .AddRazorRuntimeCompilation();
+            }
+            else
+            {
+                services.AddResponseCompression(
+                    options =>
+                    {
+                        options.EnableForHttps = true;
+                        options.Providers.Add<GzipCompressionProvider>();
+                    });
+
+                services.Configure<GzipCompressionProviderOptions>(
+                    options =>
+                    {
+                        options.Level = CompressionLevel.Optimal;
+                    });
+
+                services
+                    .AddControllersWithViews(
+                        options =>
+                        {
+                            options.OutputFormatters.Clear();  // Uses faster Utf8Json instead of built-ins.
+                            options.OutputFormatters.Add(new JsonOutputFormatter(StandardResolver.ExcludeNull));
+
+                            options.InputFormatters.Clear();
+                            options.InputFormatters.Add(new JsonInputFormatter());
+                        });
+            }
+        }
+
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddResponseCaching();
-
+            // services.AddResponseCaching(); // Self-explanatory.
+            // Disabled while testing features out. Response Caching can make it difficult for
+            // testing Login Failed, create that user, the Login retry.
         }
 
         public static void InitializeDatabase(this IApplicationBuilder app)

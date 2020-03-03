@@ -1,7 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using System.IO.Compression;
 using TestMvcClient;
+using Utf8Json.AspNetCoreMvcFormatter;
+using Utf8Json.Resolvers;
 
 namespace TestMvClient
 {
@@ -43,6 +49,55 @@ namespace TestMvClient
                         options.SignedOutCallbackPath = "/Home/Index";
                     }
                 );
+        }
+
+        public static void ConfigureControllers(this IServiceCollection services)
+        {
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true; // Needed until Utf8Json Mvc Formatters are updated.
+            });
+
+            if (Utils.IsDebug) // To Simplify Debugging we don't compress responses and we allow for Razor edits to be viewed at runtime.
+            {
+                services
+                    .AddControllersWithViews(
+                        options =>
+                        {
+                            options.OutputFormatters.Clear(); // Uses faster Utf8Json instead of built-ins.
+                            options.OutputFormatters.Add(new JsonOutputFormatter(StandardResolver.ExcludeNull));
+
+                            options.InputFormatters.Clear();
+                            options.InputFormatters.Add(new JsonInputFormatter());
+                        })
+                    .AddRazorRuntimeCompilation();
+            }
+            else
+            {
+                services.AddResponseCompression(
+                    options =>
+                    {
+                        options.EnableForHttps = true;
+                        options.Providers.Add<GzipCompressionProvider>();
+                    });
+
+                services.Configure<GzipCompressionProviderOptions>(
+                    options =>
+                    {
+                        options.Level = CompressionLevel.Optimal;
+                    });
+
+                services
+                    .AddControllersWithViews(
+                        options =>
+                        {
+                            options.OutputFormatters.Clear();  // Uses faster Utf8Json instead of built-ins.
+                            options.OutputFormatters.Add(new JsonOutputFormatter(StandardResolver.ExcludeNull));
+
+                            options.InputFormatters.Clear();
+                            options.InputFormatters.Add(new JsonInputFormatter());
+                        });
+            }
         }
     }
 }

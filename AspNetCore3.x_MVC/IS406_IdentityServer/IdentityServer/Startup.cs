@@ -16,20 +16,17 @@ namespace IdentityServer
 
             services.ConfigureAspNetIdentity(config.GetConnectionString("Identity"));
             services.ConfigureIdentityServer(config.GetConnectionString("Identity"));
-
-            // Adding our custom classes/services being setup.
-            services.ConfigureServices();
-
-            if (Utils.IsDebug)
-            { services.AddControllersWithViews().AddRazorRuntimeCompilation(); }
-            else
-            { services.AddControllersWithViews(); }
+            services.ConfigureControllers();
+            services.ConfigureServices(); // Adding our custom classes/services setup.
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSerilogHttpContextLogger();
-            app.UseSerilogRequestLogging();
+            if (!Utils.IsDebug)
+            { app.UseResponseCompression(); } // This middleware is first (so its the last one hit on the way out for responses).
+
+            app.UseSerilogHttpContextLogger(); // Allows to add additional log properties to Serilog table.
+            app.UseSerilogRequestLogging(); // The main package that logs requests.
 
             if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 
