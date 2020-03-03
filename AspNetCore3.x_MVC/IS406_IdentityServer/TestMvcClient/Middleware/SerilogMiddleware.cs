@@ -38,13 +38,13 @@ namespace TestMvClient.Middleware
             LogContext.PushProperty("UserName", username);
             LogContext.PushProperty("IP", httpContext.Connection.RemoteIpAddress.ToString());
 
-            await LogRequestAsync(httpContext);
+            //await LogRequestAsync(httpContext);
             await _next(httpContext);
-            await LogResponseAsync(httpContext);
+            //await LogResponseAsync(httpContext);
         }
 
         private const string RequestTemplate = "Request: {RequestMethod} {RequestPath}";
-        private const string RequestTooLargeTemplate = "Request: {RequestMethod} {RequestPath} (Body Too Large)";
+        private const string RequestTooLargeTemplate = "Request: {RequestMethod} {RequestPath} (No Body / Body Too Large)";
 
         private async Task LogRequestAsync(HttpContext httpContext)
         {
