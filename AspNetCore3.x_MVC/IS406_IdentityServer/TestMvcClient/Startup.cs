@@ -1,9 +1,10 @@
-using IdentityServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using TestMvClient;
+using TestMvClient.Middleware;
 
 namespace TestMvcClient
 {
@@ -21,9 +22,10 @@ namespace TestMvcClient
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
-
+            app.UseSerilogHttpContextLogger();
             app.UseSerilogRequestLogging();
+
+            if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 
             app.UseRouting();
 

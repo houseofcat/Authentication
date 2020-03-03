@@ -107,26 +107,8 @@ namespace IdentityServer
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
+            services.AddResponseCaching();
 
-            // The definition UserManager<IdentityUser> and SignInManager<IdentityUser>
-            // require a Scope resolve from Dependency Injection.
-
-            // If you were to go with custom classes akin to Services that have
-            // UserManager (et cetera) as dependencies, the service can only be added
-            // properly with AddScoped. If your service was designed as a singleton, 
-            // this could effect performance significantly. You may need to find a work
-            // around in such a case (i.e. using custom AspNet classes.).
-
-            // Example.) Service being added with AddSingleton will cause an InvalidOperationException.
-            //services.AddSingleton<IUserService>(s =>
-            //{
-            //    return new UserService(
-            //        s.GetRequiredService<UserManager<IdentityUser>>(),
-            //        s.GetRequiredService<SignInManager<IdentityUser>>());
-            //});
-
-            // So we will be using UserManager and SignInManager directly into the
-            // Controllers themselves.
         }
 
         public static void InitializeDatabase(this IApplicationBuilder app)

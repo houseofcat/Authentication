@@ -1,3 +1,4 @@
+using IdentityServer.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,11 +28,12 @@ namespace IdentityServer
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSerilogHttpContextLogger();
+            app.UseSerilogRequestLogging();
+
             if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 
             if (Utils.IsDebug) { app.InitializeDatabase(); }
-
-            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

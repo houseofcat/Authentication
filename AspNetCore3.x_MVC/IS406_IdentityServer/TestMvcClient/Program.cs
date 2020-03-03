@@ -29,11 +29,11 @@ namespace TestMvcClient
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseSerilog();
 
         public static IHost CreateSerilogLogger(this IHost host)
         {
@@ -43,10 +43,12 @@ namespace TestMvcClient
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .MinimumLevel.Override("System", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("System", LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
                 .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
                 .Enrich.FromLogContext()
+                .Enrich.WithProperty("ApplicationName", typeof(Program).Assembly.GetName().Name)
                 .WriteTo.Console(
                     outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}",
                     theme: AnsiConsoleTheme.Literate)
@@ -55,7 +57,7 @@ namespace TestMvcClient
 
             if (Utils.IsDebug) { Serilog.Debugging.SelfLog.Enable(Console.WriteLine); }
 
-            Log.Information("Logger created. Starting IdentityServer...");
+            Log.Information("Serilog Logger created. Starting IdentityServer...");
 
             return host;
         }
