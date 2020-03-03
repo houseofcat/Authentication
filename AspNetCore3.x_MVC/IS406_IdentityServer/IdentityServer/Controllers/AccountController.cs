@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using IdentityServer.Requests;
+using IdentityServer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,64 +10,75 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.Controllers
 {
-    [Route("api/v1/[controller]")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    [Route("account")]
+    public class AccountController : Controller
     {
         private IMapper Mapper { get; }
         private UserManager<IdentityUser> UserManager { get; }
+        private SignInManager<IdentityUser> SignInManager { get; }
 
         #region Constants
-        private const string UserCreatedTemplate = "Sucessfully created user {0}.";
-        private const string UserCreatedFailedTemplate = "Failed creating user {0}.";
-        private const string UserCreatedAdditionalErrorTemplate = "\r\nError {0}: {1}";
+        private const string UserRegisteredTemplate = "Sucessfully registered user {0}.";
+        private const string UserRegistrationFailedKey = "Failed";
+        private const string UserRegistrationFailedTemplate = "Failed register user {0}.";
+        private const string UserRegisteredAdditionalErrorTemplate = "\r\nError {0}: {1}";
         #endregion
 
         public AccountController(
             IMapper mapper,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             Mapper = mapper;
             UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        [HttpGet]
+        [Route("register")]
+        public IActionResult Register(string returnUrl)
+        {
+            return View(new RegisterViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("create")]
-        public async Task<IActionResult> CreateAsync(CreateUserRequest request)
+        [Route("register")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterAsync(RegisterViewModel model)
         {
-            if (request == null) { return BadRequest(); }
+            if (!ModelState.IsValid) { return View(model); }
 
-            // AutoMap the request into a new IdentityUser
-            var identityUser = Mapper.Map<IdentityUser>(request);
+            // AutoMap the view model into a new IdentityUser
+            var user = Mapper.Map<IdentityUser>(model);
 
             IdentityResult identityResult;
             try
-            { identityResult = await UserManager.CreateAsync(identityUser, request.Password); }
+            { identityResult = await UserManager.CreateAsync(user, model.Password); }
             catch (Exception ex)
             {
-                var errorMessage = Utils.Write(UserCreatedFailedTemplate, identityUser.Email);
-                Log.Logger.Error(ex, errorMessage);
-                return BadRequest(errorMessage);
+                var errorMessage = Utils.Write(UserRegistrationFailedTemplate, user.NormalizedUserName);
+                ModelState.AddModelError(UserRegistrationFailedKey, errorMessage);
+
+                Log.Error(ex, errorMessage);
+
+                return View(model);
             }
 
+            // If Successful, sign the user in.
             if (identityResult.Succeeded)
             {
-                var logMessage = Utils.Write(UserCreatedTemplate, identityUser.Email);
-                Log.Logger.Information(logMessage);
-                return Ok(logMessage);
+                await SignInManager.SignInAsync(user, model.RememberMe);
+                return Redirect(model.ReturnUrl);
             }
             else
             {
-                var errorMessage = Utils.Write(UserCreatedFailedTemplate, identityUser.Email);
-                var badRequest = BadRequest(errorMessage);
+                for(int i = 0; i < identityResult.Errors.Count(); i++)
+                {
+                    ModelState.AddModelError(identityResult.Errors.ElementAt(i).Code, identityResult.Errors.ElementAt(i).Description);
+                }
 
-                // Add additional details to internal logging - but not to the BadRequest message.
-                for (int i = 0; i < identityResult.Errors.Count(); i++)
-                { errorMessage += string.Format(UserCreatedAdditionalErrorTemplate, i, identityResult.Errors.ElementAt(i).Description); }
-
-                Log.Logger.Error(errorMessage);
-                return badRequest;
+                return View(model);
             }
         }
     }

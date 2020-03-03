@@ -22,5 +22,8 @@
             <button type="submit">Sign In</button>
         </div>
     </form>
+    <div>
+        <a asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Or Register here!</a>
+    </div>
 </body>
 </html>

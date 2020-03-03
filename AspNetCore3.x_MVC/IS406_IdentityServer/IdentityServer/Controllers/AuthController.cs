@@ -21,29 +21,31 @@ namespace IdentityServer.Controllers
         }
 
         [HttpPost]
+        // TODO ANTIFORGERY TOKEN
         public async Task<IActionResult> LoginAsync(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) { return View(model); }
+
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
+            if (result.Succeeded)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
-                if (result.Succeeded)
-                {
-                    return Redirect(model.ReturnUrl);
-                }
-                else if (result.IsLockedOut)
-                {
-
-                }
-                else if (result.IsNotAllowed)
-                {
-
-                }
-                else
-                {
-
-                }
+                return Redirect(model.ReturnUrl);
             }
-            return View();
+            else if (result.IsLockedOut)
+            {
+                // TODO
+                return View(model);
+            }
+            else if (result.IsNotAllowed)
+            {
+                // TODO
+                return View(model);
+            }
+            else
+            {
+                // TODO
+                return View(model);
+            }
         }
     }
 }

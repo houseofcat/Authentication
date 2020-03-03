@@ -1,0 +1,45 @@
+﻿@model RegisterViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Account Registration</title>
+</head>
+<body>
+    <h1>New User Registration</h1>
+    <form asp-controller="Account" asp-action="Register" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div>
+            <label>UserName</label>
+            <input asp-for="UserName" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+        <div>
+            <label>Email</label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label>Password</label>
+            <input asp-for="Password" />
+        </div>
+        <div>
+            <label>Confirm Password</label>
+            <input asp-for="ConfirmPassword" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <div>
+            <label>Remember Me</label>
+            <input asp-for="RememberMe" type="checkbox" checked="" />
+        </div>
+        <div>
+            <button type="submit">Register</button>
+        </div>
+        <div asp-validation-summary="All"></div>
+    </form>
+    <div>
+        <a asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">Or Login instead!</a>
+    </div>
+</body>
+</html>
