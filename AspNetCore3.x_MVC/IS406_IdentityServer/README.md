@@ -59,6 +59,9 @@ Compressed responses over secure connections can be controlled with the EnableFo
 `disabled by default`. Using compression with dynamically generated pages can lead to security problems  
 such as the CRIME and BREACH attacks.  
 
+## Note: Consent Required
+IdentityServer4 Consent Required is currently disabled in the IS4/Resources.cs/Clients  
+
 ## Sources
 
 IdentityServer4 - Authorize Endpoint  

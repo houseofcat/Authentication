@@ -32,7 +32,7 @@ namespace IdentityServer
                         new Secret("TestApiClientSecret".ToSha256())
                     },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = new List<string>{ "TestApi" }
+                    AllowedScopes = new List<string>{ "TestApi" },
                 },
                 new Client
                 {
@@ -52,7 +52,9 @@ namespace IdentityServer
                         "TestApiClient",
                         IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
-                    } 
+                    },
+
+                    RequireConsent = false, // Only temporary till we are ready to handle user consent.
                 },
             };
 

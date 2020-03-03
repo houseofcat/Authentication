@@ -28,8 +28,7 @@ namespace IdentityServer.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
                 if (result.Succeeded)
                 {
-                    // TODO
-                    //await _signInManager.SignInAsync()
+                    return Redirect(model.ReturnUrl);
                 }
                 else if (result.IsLockedOut)
                 {
