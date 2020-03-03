@@ -29,7 +29,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Email\": \"test@email.io\",\n    \"UserName\": null,\n    \"Password\": \"Test_password1\"\n}"
+					"raw": "{\n    \"Email\": \"test@email.io\",\n    \"UserName\": \"TestUser\",\n    \"Password\": \"Test_password1\"\n}"
 				},
 				"url": {
 					"raw": "https://localhost:5001/api/v1/account/create",
