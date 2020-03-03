@@ -14,7 +14,7 @@ namespace IdentityServer
             var config = services.CreateConfiguration();
 
             services.ConfigureAspNetIdentity(config.GetConnectionString("Identity"));
-            //services.ConfigureIdentityServer(config.GetConnectionString("Identity"));
+            services.ConfigureIdentityServer(config.GetConnectionString("Identity"));
 
             // Adding our custom classes/services being setup.
             services.ConfigureServices();
@@ -29,13 +29,13 @@ namespace IdentityServer
         {
             if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 
-            //if (Utils.IsDebug) { app.InitializeDatabase(); }
+            if (Utils.IsDebug) { app.InitializeDatabase(); }
 
             app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
-            //app.UseIdentityServer();
+            app.UseIdentityServer();
 
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
         }
