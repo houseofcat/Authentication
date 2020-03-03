@@ -1,15 +1,17 @@
-﻿using IdentityServer.ViewModels.Auth;
+﻿using IdentityServer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServer.Controllers
 {
     public class AuthController : Controller
     {
-        public IActionResult Login()
+        [HttpGet]
+        public IActionResult Login(string returnUrl)
         {
-            return View();
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
+        [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
             return View();
