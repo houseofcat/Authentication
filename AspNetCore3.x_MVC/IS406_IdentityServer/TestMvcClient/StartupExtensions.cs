@@ -29,19 +29,20 @@ namespace IdentityServer
                 .AddAuthentication(
                     options =>
                     {
-                        options.DefaultScheme = "Identity.MvcClient";
+                        options.DefaultScheme = "Identity.MvcClient.Cookie";
                         options.DefaultChallengeScheme = "oidc"; // oidc Scheme Name
                     })
-                .AddCookie("Identity.MvcClient")
+                .AddCookie("Identity.MvcClient.Cookie")
                 .AddOpenIdConnect( // extension is located in Microsoft.AspnetCore.Authentication.OpenIdConnect Nuget
                     "oidc", // oidc Scheme Name
                     options => // scheme configuration
                     {
-                        options.Authority = "https://localhost:5001"; // IdentityServer4
+                        options.Authority = "https://localhost:5001/"; // IdentityServer4
                         options.ClientId = "TestMvcClient";
                         options.ClientSecret = "TestMvcClientSecret"; // keep it secret, keep it safe
                         options.SaveTokens = true;
                         options.ResponseType = "code";
+                        options.SignedOutCallbackPath = "/Home/Index";
                     }
                 );
         }

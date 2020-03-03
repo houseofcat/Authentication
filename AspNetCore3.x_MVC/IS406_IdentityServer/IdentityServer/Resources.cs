@@ -41,8 +41,11 @@ namespace IdentityServer
                     {
                         new Secret("TestMvcClientSecret".ToSha256())
                     },
-                    AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = new List<string> { "https://localhost:5031/signin-oidc" },
+                    AllowedGrantTypes = GrantTypes.Code, // Different GrantType
+
+                    RedirectUris = new List<string>{ "https://localhost:5011/signin-oidc" },
+                    PostLogoutRedirectUris = new List<string>{ "https://localhost:5011/Home/Index" },
+
                     AllowedScopes = new List<string>
                     {
                         "TestApi",

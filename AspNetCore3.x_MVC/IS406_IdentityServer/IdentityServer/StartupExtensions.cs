@@ -62,6 +62,7 @@ namespace IdentityServer
             {
                 options.Cookie.Name = "IS406_IdentityServer.Cookie";
                 options.LoginPath = "/Auth/Login";
+                options.LogoutPath = "/Auth/Logout";
             });
         }
 

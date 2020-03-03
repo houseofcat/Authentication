@@ -5,6 +5,9 @@
  * Create users via AccountController (ApiController).
    * Just needs a Post request to create users.
  * Automapper and Mapping Profiles mapping a CreateUserRequest to an IdentityUser.
+ * Carrying on the login flow of IS402.
+   * Added a cleaned up TestMvcClient project (now using Serilog.)
+     * The settings are found `appsettings.json` and the table is `[IdentityLogging].[TestMvcClient]`
 
 ## Taking A Step Back
 Things escalated pretty quick with all the customizations that went on, but now I want to bring the  
