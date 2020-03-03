@@ -13,21 +13,21 @@
         <div>
             <label>UserName</label>
             <input asp-for="UserName" />
-            <span asp-validation-for="UserName"></span>
+            <span asp-validation-for="UserName"></span> <!-- Shows the errors for ConfirmPassword Validations. -->
         </div>
         <div>
             <label>Email</label>
             <input asp-for="Email" />
-            <span asp-validation-for="Email"></span>
+            <span asp-validation-for="Email"></span> <!-- Shows the errors for ConfirmPassword Validations. -->
         </div>
         <div>
             <label>Password</label>
-            <input asp-for="Password" />
+            <input asp-for="Password" /> 
         </div>
         <div>
             <label>Confirm Password</label>
             <input asp-for="ConfirmPassword" />
-            <span asp-validation-for="ConfirmPassword"></span>
+            <span asp-validation-for="ConfirmPassword"></span> <!-- Shows the errors for ConfirmPassword Validations. -->
         </div>
         <div>
             <label>Remember Me</label>
@@ -36,7 +36,7 @@
         <div>
             <button type="submit">Register</button>
         </div>
-        <div asp-validation-summary="All"></div>
+        <div asp-validation-summary="All"></div> <!-- Shows all the errors in the Validation State. -->
     </form>
     <div>
         <a asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">Or Login instead!</a>

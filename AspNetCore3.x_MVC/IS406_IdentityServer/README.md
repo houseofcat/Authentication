@@ -10,9 +10,20 @@
    * Added a cleaned up TestMvcClient project (now using Serilog.)  
      * The settings are found `appsettings.json` and the table is `[IdentityLogging].[TestMvcClient]`  
  * Custom Middleware to better integrate with AspNetCore Request logging.  
- * Modifications to Serilog Logging table to add more columns and JSON (instead of XML).
+ * Modifications to Serilog Logging table to add more columns and JSON (instead of XML).  
  * Replacing JsonFormatter with the Utf8Json one (nuget `Utf8Json.AspNetCoreMvcFormatter`).  
- * Adding compression to ResponseBody.
+ * Adding compression to ResponseBody.  
+ * Adding a MvcController and ApiController with the same name.  
+   * Separate namespaces recommended.  
+     * IdentityServer.ApiControllers  
+     * IdentityServer.Controllers  
+   * Set the HttpMethods/Routes manually. Routes must be different!.  
+   * MvcController needs a Route specified on the class name.  
+     * API: `api/v1/Account`  
+     * MVC: `Account`  
+ * Views with validation errors.  
+ * Adding internal ModelState errors and displaying them back to user (use caution).
+ * LoginViewModel / RegistViewModel demonstrate PersonalData, DataType, and Compare attributes.  
 
 ## Taking A Step Back
 Things escalated pretty quick with all the customizations that went on, but now I want to bring the  
@@ -24,19 +35,24 @@ replacement classes and switching back to the built-ins.
 It's best to purge all the tables and the previous migrations before proceeding - all of the tools needed  
 are in the previous few examples and their `README.md`.  
 
-## Additional Help
+We are going to focusing in on Logging In, Registering Users, Validation. To help with that, we need to  
+enhance our logging. Out of the box, a lot of data was missing that I like to see.  
+
+I also added a few items such as Response Compression and replacing JsonFormatter built-in with the very
+fast UTF8Json formatters.  
+
+### Additional Help
 I have included a PowerShell script to create a TestUser or you can use the Postman collection provided.  
 
-## Note on Creating Classes That Inherit UserManager<TUser>
+### Note on Creating Classes That Inherit UserManager<TUser>
 
-The definition UserManager<IdentityUser> and SignInManager<IdentityUser>  
-require a Scope resolve from Dependency Injection.  
+The definition UserManager<IdentityUser> and SignInManager<IdentityUser> require a Scope resolve from  
+Dependency Injection.  
 
-If you were to go with custom classes akin to Services that have  
-UserManager (et cetera) as dependencies, the service can only be added  
-properly with AddScoped. If your service was designed as a singleton,  
-this could effect performance significantly. You may need to find a work  
-around in such a case (i.e. using custom AspNet classes.).  
+If you were to go with custom classes akin to Services that have UserManager (et cetera) as  
+dependencies, the service can only be added properly with AddScoped. If your service was designed as  
+a singleton, this could effect performance significantly. You may need to find a work around in such  
+a case (i.e. using custom AspNet classes.).  
 
 Example.) Service being added with AddSingleton will cause an InvalidOperationException. 
 
@@ -47,10 +63,9 @@ Example.) Service being added with AddSingleton will cause an InvalidOperationEx
             s.GetRequiredService<SignInManager<IdentityUser>>());
     });
 
-So we will be using UserManager and SignInManager directly into the
-Controllers themselves.  
+So we will be using UserManager and SignInManager directly into the Controllers themselves.  
 
-## Serilog
+## Note For Serilog
 Porbably best to delete all IdentityLogging tables before starting up. I have learned on how to get things  
 more desireable.
 
@@ -96,3 +111,12 @@ https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?vi
 
 Microsoft Doc - Response caching in ASP.NET Core  
 https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-3.1  
+
+Microsoft Doc - Validation Error UI  
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/validation?view=aspnetcore-3.1
+
+Microsoft Doc - Handle errors in ASP.NET Core web APIs  
+https://docs.microsoft.com/en-us/aspnet/core/web-api/handle-errors?view=aspnetcore-3.1  
+
+Microsoft Doc - Prevent Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core  
+https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1

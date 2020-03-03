@@ -11,7 +11,7 @@ namespace IdentityServer.ViewModels
         [PersonalData, Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [PersonalData, Required, DataType(DataType.Password), Compare("Password")]
+        [PersonalData, Required, DataType(DataType.Password), Compare("Password")] // Compares it the "Password" property above it.
         public string ConfirmPassword { get; set; }
 
         [PersonalData, Required, DataType(DataType.EmailAddress)]

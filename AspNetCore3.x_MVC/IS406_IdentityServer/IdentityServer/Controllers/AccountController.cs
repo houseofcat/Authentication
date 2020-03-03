@@ -69,9 +69,9 @@ namespace IdentityServer.Controllers
             if (identityResult.Succeeded)
             {
                 await SignInManager.SignInAsync(user, model.RememberMe);
-                return Redirect(model.ReturnUrl);
+                return Redirect(model.ReturnUrl ?? "/");
             }
-            else
+            else // Else - for now - lets add all the Errors to ModelState to display them on the Register.cshtml page.
             {
                 for(int i = 0; i < identityResult.Errors.Count(); i++)
                 {
