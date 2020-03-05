@@ -42,22 +42,27 @@ A continuation of IS401_IdentityServerBasics to show how to start using Identity
 
 [More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS402_IdentityServerMvcClient/)  
 
-### IS403_IdentityServer_AspNetIdentity_SqlServer
+### IS403_IdentityServer_AspNetIdentity_SqlServer  
 A continuation of IS402_IdentityServerMvcClient to show how to setup Serilog, AspNetIdentity, and SqlServer with IdentityServer4.  
 
 [More Details in Readme](https://github.com/houseofcat/Authentication/blob/master/AspNetCore3.x_MVC/IS403_IdentityServer_AspNetIdentity_SqlServer/)  
 
-### IS404_IdentityServer_AspNetIdentity_CustomUser
+### IS404_IdentityServer_AspNetIdentity_CustomUser  
 A continuation of IS403_IdentityServer_AspNetIdentity_SqlServer with prettier logging, custom IdentityUser/IdentityRole, change primary key type, and more!  
 
 [More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS404_IdentityServer_AspNetIdentity_CustomUser/)  
 
-### IS405_IdentityServer_AspNetIdentity_StoredProcedures
-A continuation of IS404_IdentityServer_AspNetIdentity_CustomUser with replacing some EntityFramework with SqlServer stored procedures.
+### IS405_IdentityServer_AspNetIdentity_StoredProcedures  
+A continuation of IS404_IdentityServer_AspNetIdentity_CustomUser with replacing some EntityFramework with SqlServer stored procedures.  
 
 [More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS405_IdentityServer_AspNetIdentity_StoredProcedures/)  
 
-### IS406_IdentityServer
+### IS406_IdentityServer  
 A focus back on IdentityServer (with AspNetIdentity, SqlServer, and Serilog) authentication and authorization.  
 
 [More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS406_IdentityServer/)  
+
+### IS407_IdentityServerContinued   
+A continuation of IS406_IdentityServer continuing authentication and authorization.   
+
+[More Details in Readme](https://github.com/houseofcat/Authentication/tree/master/AspNetCore3.x_MVC/IS407_IdentityServerContinued/)  

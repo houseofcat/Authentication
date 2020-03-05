@@ -16,10 +16,12 @@ namespace MvcClient
         {
             try
             {
-                await CreateHostBuilder(args)
-                    .Build()
-                    .CreateSerilogLogger()
-                    .RunAsync();
+                using var host = CreateHostBuilder(args)
+                    .Build();
+
+                host.CreateSerilogLogger();
+
+                await host.RunAsync();
             }
             catch (Exception ex)
             { Log.Fatal(ex, "Host terminated unexpectedly."); }

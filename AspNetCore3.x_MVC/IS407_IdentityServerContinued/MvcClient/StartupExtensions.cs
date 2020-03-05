@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcClient.Middleware;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using Utf8Json.Resolvers;
@@ -32,19 +33,20 @@ namespace MvcClient
                     options =>
                     {
                         options.DefaultScheme = "Identity.MvcClient.Cookie";
-                        options.DefaultChallengeScheme = "oidc"; // oidc Scheme Name
+                        options.DefaultChallengeScheme = "oidc";
                     })
                 .AddCookie("Identity.MvcClient.Cookie")
-                .AddOpenIdConnect( // extension is located in Microsoft.AspnetCore.Authentication.OpenIdConnect Nuget
-                    "oidc", // oidc Scheme Name
-                    options => // scheme configuration
+                .AddOpenIdConnect(
+                    "oidc",
+                    options =>
                     {
-                        options.Authority = "https://localhost:5001/"; // IdentityServer4
+                        options.Authority = "https://localhost:5001/";
                         options.ClientId = "MvcClient";
-                        options.ClientSecret = "MvcClientSecret"; // keep it secret, keep it safe
+                        options.ClientSecret = "MvcClientSecret";
                         options.SaveTokens = true;
                         options.ResponseType = "code";
                         options.SignedOutCallbackPath = "/Home/Index";
+                        options.Scope.Add("Mvc.Scope"); // NEW Token given to users.
                     }
                 );
         }

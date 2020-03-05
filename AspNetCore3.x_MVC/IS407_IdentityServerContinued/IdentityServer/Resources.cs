@@ -11,7 +11,12 @@ namespace IdentityServer
             {
                 new IdentityResources.OpenId(), // required scopes for OpenID 2.0
                 new IdentityResources.Profile(),
-                new IdentityResources.Email()
+                new IdentityResources.Email(),
+                new IdentityResource
+                {
+                    Name = "Mvc.Scope",
+                    UserClaims = new List<string> { "ViewToken" },
+                }
             };
 
         public static IEnumerable<ApiResource> GetApis() =>
@@ -34,14 +39,16 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Code, // Different GrantType
 
                     RedirectUris = new List<string>{ "https://localhost:5011/signin-oidc" },
-                    PostLogoutRedirectUris = new List<string>{ "https://localhost:5011/Home/Index" },
+                    PostLogoutRedirectUris = new List<string>{ "https://localhost:5011/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
                         IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
+                        "Mvc.Scope",
                     },
 
+                    AlwaysIncludeUserClaimsInIdToken = true, // So we can see all the users claims.
                     RequireConsent = false, // Only temporary till we are ready to handle user consent.
                 },
                 new Client
@@ -52,9 +59,6 @@ namespace IdentityServer
                         new Secret("PostmanSecret".ToSha256())
                     },
                     AllowedGrantTypes = GrantTypes.Code, // Different GrantType
-
-                    RedirectUris = new List<string>{ "https://localhost:5011/signin-oidc" },
-                    PostLogoutRedirectUris = new List<string>{ "https://localhost:5011/Home/Index" },
 
                     AllowedScopes = new List<string>
                     {

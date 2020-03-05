@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IdentityServer.Controllers
@@ -49,29 +50,33 @@ namespace IdentityServer.Controllers
         {
             if (!ModelState.IsValid) { return View(model); }
 
-            // AutoMap the view model into a new IdentityUser
             var user = Mapper.Map<IdentityUser>(model);
 
             IdentityResult identityResult;
             try
-            { identityResult = await UserManager.CreateAsync(user, model.Password); }
+            {
+                // Adding Special Claim to the User that they can ViewToken and which ViewToken they can see.
+                await UserManager.AddClaimAsync(user, new Claim("ViewToken", "access_token"));
+
+                identityResult = await UserManager.CreateAsync(user, model.Password);
+            }
             catch (Exception ex)
             {
                 var errorMessage = Utils.Write(UserRegistrationFailedTemplate, user.NormalizedUserName);
-                ModelState.AddModelError(UserRegistrationFailedKey, errorMessage);
 
+                ModelState.AddModelError(UserRegistrationFailedKey, errorMessage);
                 Log.Error(ex, errorMessage);
 
                 return View(model);
             }
 
-            // If Successful, sign the user in.
             if (identityResult.Succeeded)
             {
+
                 await SignInManager.SignInAsync(user, model.RememberMe);
                 return Redirect(model.ReturnUrl ?? "/");
             }
-            else // Else - for now - lets add all the Errors to ModelState to display them on the Register.cshtml page.
+            else
             {
                 for(int i = 0; i < identityResult.Errors.Count(); i++)
                 {

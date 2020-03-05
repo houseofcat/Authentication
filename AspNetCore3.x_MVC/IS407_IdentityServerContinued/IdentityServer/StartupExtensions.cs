@@ -65,7 +65,7 @@ namespace IdentityServer
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.Name = "IS406_IdentityServer.Cookie";
+                options.Cookie.Name = "IS407_IdentityServer.Cookie";
                 options.LoginPath = "/Auth/Login";
                 options.LogoutPath = "/Auth/Logout";
             });
