@@ -59,7 +59,6 @@ namespace IdentityServer.Middleware
             resolver = jsonResolver ?? JsonSerializer.DefaultResolver;
         }
 
-
         public bool CanRead(InputFormatterContext context)
         {
             return true;

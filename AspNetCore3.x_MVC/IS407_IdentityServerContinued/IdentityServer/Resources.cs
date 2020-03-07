@@ -12,7 +12,7 @@ namespace IdentityServer
                 new IdentityResources.OpenId(), // required scopes for OpenID 2.0
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                new IdentityResource
+                new IdentityResource // Creating the new custom Scope
                 {
                     Name = "Mvc.Scope",
                     UserClaims = new List<string> { "ViewToken" },
@@ -45,7 +45,7 @@ namespace IdentityServer
                     {
                         IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
-                        "Mvc.Scope",
+                        "Mvc.Scope", // Adding client level access to seeing this new claim
                     },
 
                     AlwaysIncludeUserClaimsInIdToken = true, // So we can see all the users claims.
@@ -58,6 +58,7 @@ namespace IdentityServer
                     {
                         new Secret("PostmanSecret".ToSha256())
                     },
+
                     AllowedGrantTypes = GrantTypes.Code, // Different GrantType
 
                     AllowedScopes = new List<string>
@@ -65,6 +66,7 @@ namespace IdentityServer
                         IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
                     },
+
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false, // Only temporary till we are ready to handle user consent.
                 },

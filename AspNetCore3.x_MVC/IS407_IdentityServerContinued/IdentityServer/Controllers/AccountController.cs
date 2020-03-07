@@ -55,9 +55,6 @@ namespace IdentityServer.Controllers
             IdentityResult identityResult;
             try
             {
-                // Adding Special Claim to the User that they can ViewToken and which ViewToken they can see.
-                await UserManager.AddClaimAsync(user, new Claim("ViewToken", "access_token"));
-
                 identityResult = await UserManager.CreateAsync(user, model.Password);
             }
             catch (Exception ex)
@@ -72,8 +69,10 @@ namespace IdentityServer.Controllers
 
             if (identityResult.Succeeded)
             {
-
+                // Adding Special Claim to the User that they can ViewToken and which ViewToken they can see.
+                await UserManager.AddClaimAsync(user, new Claim("ViewToken", "access_token"));
                 await SignInManager.SignInAsync(user, model.RememberMe);
+
                 return Redirect(model.ReturnUrl ?? "/");
             }
             else

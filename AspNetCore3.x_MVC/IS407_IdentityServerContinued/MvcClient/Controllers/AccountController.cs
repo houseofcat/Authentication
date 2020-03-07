@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
@@ -25,19 +24,19 @@ namespace MvcClient.Controllers
             {
                 var _accessToken = new JwtSecurityTokenHandler()
                     .ReadJwtToken(accessToken);
-            }
+            } // Break Point Here To Look At _Token
 
             if (!string.IsNullOrWhiteSpace(idToken))
             {
                 var _idToken = new JwtSecurityTokenHandler()
                     .ReadJwtToken(idToken);
-            }
+            } // Break Point Here To Look At _Token
 
             if (!string.IsNullOrWhiteSpace(refreshToken))
             {
                 var _refreshToken = new JwtSecurityTokenHandler()
                     .ReadJwtToken(refreshToken);
-            }
+            } // Break Point Here To Look At _Token
 
             return View();
         }

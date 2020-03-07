@@ -46,7 +46,7 @@ namespace MvcClient
                         options.SaveTokens = true;
                         options.ResponseType = "code";
                         options.SignedOutCallbackPath = "/Home/Index";
-                        options.Scope.Add("Mvc.Scope"); // NEW Token given to users.
+                        options.Scope.Add("Mvc.Scope"); // This service (which is a IS4 client) is requesting the new scope we added in IdentityServer.
                     }
                 );
         }
