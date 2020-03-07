@@ -25,12 +25,14 @@ namespace MvcClient.Controllers
                 var _accessToken = new JwtSecurityTokenHandler()
                     .ReadJwtToken(accessToken);
             } // Break Point Here To Look At _Token
+            // Verify Claim {scope: Mvc.Scope} is available. 
 
             if (!string.IsNullOrWhiteSpace(idToken))
             {
                 var _idToken = new JwtSecurityTokenHandler()
                     .ReadJwtToken(idToken);
             } // Break Point Here To Look At _Token
+            // Verify Claim {ViewToken: access_token} is now seen. This is inside the Mvc.Scope created in IdentityServer4
 
             if (!string.IsNullOrWhiteSpace(refreshToken))
             {
