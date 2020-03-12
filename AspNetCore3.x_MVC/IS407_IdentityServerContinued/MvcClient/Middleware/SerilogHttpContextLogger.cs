@@ -26,23 +26,46 @@ namespace MvcClient
         private readonly RequestDelegate _next;
         private ArrayPool<byte> SharedBytePool { get; } = ArrayPool<byte>.Shared;
         private readonly bool LogRequestBody;
+        private readonly int LogRequestBodyMaxSize;
         private readonly bool LogResponseBody;
+        private readonly int LogResponseBodyMaxSize;
+
+        #region Constants 
+
+        private const string UserNameProperty = "UserName";
+        private const string AnonUserName = "*";
+        private const string IPProperty = "IP";
+        private const string UserAgentProperty = "UserAgent";
+        private const string UserAgentField = "User-Agent";
+        private const string RequestHeadersProperty = "RequestHeaders";
+        private const string RequestBodyProperty = "RequestBody";
+        private const string ResponseBodyProperty = "ResponseBody";
+
+        private const string RequestTemplate = "Middleware Request: {RequestMethod} {RequestPath}";
+        private const string RequestTooLargeTemplate = "Middleware Request: {RequestMethod} {RequestPath} (Body Skipped)";
+
+        private const string ResponseTemplate = "Middleware Response: {RequestMethod} {RequestPath} {StatusCode}";
+        private const string ResponseTooLargeTemplate = "Middleware Response: {RequestMethod} {RequestPath} {StatusCode} (Body Skipped)";
+
+        #endregion
 
         public SerilogHttpContextLogger(RequestDelegate next, IConfiguration configuration)
         {
             _next = next ?? throw new ArgumentNullException(nameof(next));
-            LogRequestBody = configuration.GetSection("Application").GetValue<bool>("LogRequestBody");
-            LogResponseBody = configuration.GetSection("Application").GetValue<bool>("LogResponseBody");
+            LogRequestBody = configuration.GetSection("Application:LoggingMiddleware").GetValue<bool>("LogRequestBody");
+            LogResponseBody = configuration.GetSection("Application:LoggingMiddleware").GetValue<bool>("LogResponseBody");
+            LogRequestBodyMaxSize = configuration.GetSection("Application:LoggingMiddleware").GetValue<int>("LogRequestBodyMaxSize");
+            LogResponseBodyMaxSize = configuration.GetSection("Application:LoggingMiddleware").GetValue<int>("LogResponseBodyMaxSize");
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
             if (httpContext == null) throw new ArgumentNullException(nameof(httpContext));
 
-            var username = httpContext.User.Identity.IsAuthenticated ? httpContext.User.Identity.Name : "*";
-            LogContext.PushProperty("UserName", username);
-            LogContext.PushProperty("IP", httpContext.Connection.RemoteIpAddress.ToString());
-            LogContext.PushProperty("UserAgent", httpContext.Request.Headers["User-Agent"]);
+            var username = httpContext.User.Identity.IsAuthenticated ? httpContext.User.Identity.Name : AnonUserName;
+            LogContext.PushProperty(UserNameProperty, username);
+            LogContext.PushProperty(IPProperty, httpContext.Connection.RemoteIpAddress.ToString());
+            LogContext.PushProperty(UserAgentProperty, httpContext.Request.Headers[UserAgentField]);
 
             if (LogRequestBody) { await LogRequestBodyAsync(httpContext); }
 
@@ -51,14 +74,11 @@ namespace MvcClient
             if (LogResponseBody) { await LogResponseBodyAsync(httpContext); }
         }
 
-        private const string RequestTemplate = "Middleware Request: {RequestMethod} {RequestPath}";
-        private const string RequestTooLargeTemplate = "Middleware Request: {RequestMethod} {RequestPath} (Body Skipped)";
-
         private async Task LogRequestBodyAsync(HttpContext httpContext)
         {
             if (httpContext.Request.ContentLength.HasValue
                 && httpContext.Request.ContentLength.Value > 0
-                && httpContext.Request.ContentLength.Value < 100_000)
+                && httpContext.Request.ContentLength.Value < LogRequestBodyMaxSize)
             {
                 httpContext.Request.EnableBuffering();
 
@@ -71,11 +91,11 @@ namespace MvcClient
 
                 Log
                     .ForContext(
-                        "RequestHeaders",
+                        RequestHeadersProperty,
                         httpContext.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString()),
                         destructureObjects: true)
                     .ForContext(
-                        "RequestBody",
+                        RequestBodyProperty,
                         Encoding.UTF8.GetString(buffer, 0, length))
                     .Information(
                         RequestTemplate,
@@ -88,7 +108,7 @@ namespace MvcClient
             {
                 Log
                     .ForContext(
-                        "RequestHeaders",
+                        RequestHeadersProperty,
                         httpContext.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString()),
                         destructureObjects: true)
                     .Information(
@@ -98,14 +118,11 @@ namespace MvcClient
             }
         }
 
-        private const string ResponseTemplate = "Middleware Response: {RequestMethod} {RequestPath} {StatusCode}";
-        private const string ResponseTooLargeTemplate = "Middleware Response: {RequestMethod} {RequestPath} {StatusCode} (Body Skipped)";
-
         private async Task LogResponseBodyAsync(HttpContext httpContext)
         {
             if (httpContext.Response.ContentLength.HasValue
                 && httpContext.Response.ContentLength.Value > 0
-                && httpContext.Response.ContentLength.Value < 100_000)
+                && httpContext.Response.ContentLength.Value < LogResponseBodyMaxSize)
             {
                 httpContext.Response.Body.Seek(0, SeekOrigin.Begin);
 
@@ -116,7 +133,7 @@ namespace MvcClient
 
                 Log
                     .ForContext(
-                        "ResponseBody",
+                        ResponseBodyProperty,
                         responseBody)
                     .Information(
                         ResponseTemplate,
