@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +47,24 @@ namespace MvcClient
                         options.SaveTokens = true;
                         options.ResponseType = "code";
                         options.SignedOutCallbackPath = "/Home/Index";
+
+                        // Disabling Claims coming in the Id Token (keeping them small)
+                        // means we need to add a second round trip to get user data.
+                        // This means that this Auth is Option 2.
+                        // Option 1.) IdentityServer Includes Claims In Id Token
+                        //   One Large Token
+                        //   One Round Trip
+                        // Option 2.) IdentityServer Does Not Include Claims In Id Token
+                        //   One Smaller Token
+                        //   Two Round Trips
+                        options.GetClaimsFromUserInfoEndpoint = true;
+
+                        // We also have to Map this data from 2nd round trip.
+                        options.ClaimActions.MapUniqueJsonKey("Mvc.ViewToken", "ViewToken"); // Adding the Custom Claim
+                        // A good reason to customize the name (i.e. not call it ViewToken), ViewToken is that in case 
+                        // you external system ever changes, you only ever have to change it here. You can then build
+                        // out your Authority/Roles/Claims endpoints with having to modify them should this Claim name ever change.
+
                         options.Scope.Add("Mvc.Scope"); // This service (which is a IS4 client) is requesting the new scope we added in IdentityServer.
                     }
                 );

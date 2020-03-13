@@ -33,6 +33,7 @@ namespace MvcClient.Controllers
                     .ReadJwtToken(idToken);
             } // Break Point Here To Look At _Token
             // Verify Claim {ViewToken: access_token} is now seen. This is inside the Mvc.Scope created in IdentityServer4
+            // This is available if the ID Token has added Claims To IdentityToken.
 
             if (!string.IsNullOrWhiteSpace(refreshToken))
             {

@@ -48,7 +48,10 @@ namespace IdentityServer
                         "Mvc.Scope", // Adding client level access to seeing this new claim
                     },
 
-                    AlwaysIncludeUserClaimsInIdToken = true, // So we can see all the users claims.
+                    // Adds all the claims to the Id Token
+                    // The problem with this approach is that it fills your token with data.
+                    // Alternatively use the AddOpenIdConnect( option => GetClaimsFromUserInfoEndpoint = true;)
+                    // AlwaysIncludeUserClaimsInIdToken = true, 
                     RequireConsent = false, // Only temporary till we are ready to handle user consent.
                 },
                 new Client
