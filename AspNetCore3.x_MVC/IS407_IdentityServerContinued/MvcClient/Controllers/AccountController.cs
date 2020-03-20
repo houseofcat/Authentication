@@ -2,11 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MvcClient.ViewModels;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
-using Utf8Json;
-using Newtonsoft;
-using Newtonsoft.Json;
 
 namespace MvcClient.Controllers
 {
