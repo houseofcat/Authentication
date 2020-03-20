@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model ProfileViewModel
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -6,6 +8,20 @@
 </head>
 <body>
     <h1>Test Profile</h1>
+    <div>
+        <label asp-for="AccessToken"></label><br />
+        @Html.Raw(Model.AccessToken)<br /><br />
+        <label asp-for="JsonAccessToken"></label><br />
+        @Html.Raw(Model.JsonAccessToken)<br /><br />
+        <label asp-for="IdToken"></label><br />
+        @Html.Raw(Model.IdToken)<br /><br />
+        <label asp-for="JsonIdToken"></label><br />
+        @Html.Raw(Model.JsonIdToken)<br /><br />
+        <label asp-for="RefreshToken"></label><br />
+        @Html.Raw(Model.RefreshToken ?? "null")<br /><br />
+        <label asp-for="JsonRefreshToken"></label><br />
+        @Html.Raw(Model.JsonRefreshToken ?? "null")<br /><br />
+    </div>
     <form asp-controller="account" asp-action="logout">
         <div>
             <button type="submit">Logout!</button>
