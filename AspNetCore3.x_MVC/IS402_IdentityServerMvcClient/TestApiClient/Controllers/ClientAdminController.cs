@@ -27,14 +27,15 @@ namespace TestClient.Controllers
 
             var wellKnownDiscoveryDocument = await identityClient.GetDiscoveryDocumentAsync(); // No Url needed for this client.
 
-            var credentialResponse = await identityClient.RequestClientCredentialsTokenAsync(
-                new ClientCredentialsTokenRequest
-                {
-                    Address = wellKnownDiscoveryDocument.TokenEndpoint,
-                    ClientId = "TestApiClient",
-                    ClientSecret = "TestApiClientSecret", // no need to hash.
-                    Scope = "TestApi"
-                });
+            var credentialResponse = await identityClient
+                .RequestClientCredentialsTokenAsync(
+                    new ClientCredentialsTokenRequest
+                    {
+                        Address = wellKnownDiscoveryDocument.TokenEndpoint,
+                        ClientId = "TestApiClient",
+                        ClientSecret = "TestApiClientSecret", // no need to hash.
+                        Scope = "TestApi"
+                    });
 
             if (credentialResponse.IsError)
             { return UnprocessableEntity(); }
