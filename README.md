@@ -6,7 +6,7 @@ I have tried to include the very sources I came across. Anything I used to help 
 The projects were designed to be working locally (Kestrel), some issues will occur on specific projects I have made notes of.  
 
 
-## AspNetCore3.x_IS4.1
+## AspNetCore3.x_IS4.1 (Newer Projects)
 ### IS01_IdentityServer4.1_AspNetIdentity
 Analyzing the new raw template and tweaking it as needed in line with the other older projects.
 

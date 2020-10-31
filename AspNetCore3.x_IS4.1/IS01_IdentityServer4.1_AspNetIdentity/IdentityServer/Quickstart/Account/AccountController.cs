@@ -3,12 +3,12 @@
 
 
 using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
-using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -59,7 +59,7 @@ namespace IdentityServerHost.Quickstart.UI
             if (vm.IsExternalLoginOnly)
             {
                 // we only have one option for logging in and it's an external provider
-                return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
+                return RedirectToAction("Challenge", "External", new { provider = vm.ExternalLoginScheme, returnUrl });
             }
 
             return View(vm);
