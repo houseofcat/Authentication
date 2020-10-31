@@ -6,7 +6,12 @@ I have tried to include the very sources I came across. Anything I used to help 
 The projects were designed to be working locally (Kestrel), some issues will occur on specific projects I have made notes of.  
 
 
-## AspNetCore 3.x
+## AspNetCore3.x_IS4.1
+### IS01_IdentityServer4.1_AspNetIdentity
+Analyzing the new raw template and tweaking it as needed in line with the other older projects.
+
+
+## AspNetCore3.x_MVC (Still useful but missing IS4.1 changes)
 ### C01_CookieBasic  
 Project for working out a basic Cookie authentication with AspNetCore.  
 
