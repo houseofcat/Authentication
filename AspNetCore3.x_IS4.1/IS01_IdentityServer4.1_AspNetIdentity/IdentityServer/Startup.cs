@@ -1,9 +1,14 @@
 ﻿using IdentityServer.Data;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using System.Linq;
 using System.Reflection;
 using Utils;
 
@@ -49,10 +54,11 @@ namespace IdentityServer
 
         public void Configure(IApplicationBuilder app)
         {
-            if (Environment.IsDevelopment())
+            if (Environment.IsDevelopment() || Service.IsDebug)
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                InitializeDatabase(app);
             }
 
             app.UseStaticFiles();
@@ -65,6 +71,61 @@ namespace IdentityServer
             {
                 endpoints.MapDefaultControllerRoute();
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            Log.Logger.Information("Initializing the database...");
+
+            using var serviceScope = app
+                .ApplicationServices
+                .GetService<IServiceScopeFactory>()
+                .CreateScope();
+
+            serviceScope
+                .ServiceProvider
+                .GetRequiredService<ApplicationDbContext>()
+                .Database
+                .Migrate();
+
+            serviceScope
+                .ServiceProvider
+                .GetRequiredService<PersistedGrantDbContext>()
+                .Database
+                .Migrate();
+
+            var context = serviceScope
+                .ServiceProvider
+                .GetRequiredService<ConfigurationDbContext>();
+
+            context.Database.Migrate();
+
+            // TODO: Should Clients/Ids/Apis be in memory?
+            if (!context.Clients.Any())
+            {
+                foreach (var client in Config.Clients)
+                {
+                    context.Clients.Add(client.ToEntity());
+                }
+            }
+
+            if (!context.IdentityResources.Any())
+            {
+                foreach (var resource in Config.Ids)
+                {
+                    context.IdentityResources.Add(resource.ToEntity());
+                }
+            }
+
+            if (!context.ApiResources.Any())
+            {
+                foreach (var resource in Config.Apis)
+                {
+                    context.ApiResources.Add(resource.ToEntity());
+                }
+            }
+
+            context.SaveChanges();
         }
     }
 }
